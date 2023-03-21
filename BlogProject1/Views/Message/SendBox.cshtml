@@ -1,0 +1,29 @@
+﻿@using BlogProject1.EntityLayer.Concrete
+@model List<WriterMessage>
+@{
+    ViewData["Title"] = "SendBox";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+<h1>Giden Kutusu</h1>
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Konu</th>
+        <th>Alıcı</th>
+        <th>Tarih</th>
+        <th>Mesajı Aç</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.WriterMessageID</th>
+            <td>@item.Subject</td>
+            <td>@item.WriterReceiver.Name</td>
+            <td>@item.MessageDate.ToShortDateString()</td>
+            <td><a href="/Message/MessageDetails/@item.WriterMessageID" class="btn btn-warning">Mesajı Aç</a></td>
+        </tr>
+    }
+</table>
+<a href="/Message/SendMessage/" class="btn btn-primary">Yeni Mesaj Oluştur</a>
+

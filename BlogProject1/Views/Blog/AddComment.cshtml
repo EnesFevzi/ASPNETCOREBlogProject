@@ -1,0 +1,15 @@
+﻿@model BlogProject1.EntityLayer.Concrete.Blog
+
+<div class="comment-top">
+    <h4>Bİr Yorum Yapın</h4>
+    @ViewBag.blogId
+    <div class="comment-bottom">
+        <form action="/Comment/PartialAddComment/" method="post">
+            <input type="hidden" asp-for="BlogID" value="@ViewBag.BlogID" />
+            <input class="form-control" type="text" name="CommentUserName" placeholder="Adınız Soyadınız" required="">
+            <input class="form-control" type="text" name="CommentTitle" placeholder="Başlık" required="">
+            <textarea class="form-control" name="CommnetContent" placeholder="Yorumunuz..." required=""></textarea>
+            <button type="submit" class="btn btn-primary submit">Submit</button>
+        </form>
+    </div>
+</div>

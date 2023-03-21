@@ -1,0 +1,73 @@
+﻿@model ASPNETCOREBlogProject.Models.AddCommentViewModel
+
+
+<div class="comment-top">
+    <h4>Bir Yorum Yapın</h4>
+    @using (Html.BeginForm("PartialAddComment", "Blog", FormMethod.Post))
+    {
+        @Html.HiddenFor(x => x.BlogID, new { @Value = ViewBag.blogId })
+        <div class="comment-bottom">
+            <input class="form-control" type="text" name="CommentUserName" placeholder="Adınız Soyadınız" required="">
+            <input class="form-control" type="text" name="CommentTitle" placeholder="Başlık" required="">
+            <input class="form-control" type="text" name="BlogScore" placeholder="Blog Puanınız" required="">
+            <textarea class="form-control" name="CommnetContent" placeholder="Yorumunuz..." required=""></textarea>
+            <button type="submit" class="btn btn-primary submit">Submit</button>
+        </div>
+    }
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div class="comment-top">
+    <h4>Bİr Yorum Yapın</h4>
+    @ViewBag.blogId
+    <div class="comment-bottom">
+        <form action="/Comment/PartialAddComment/" method="post">
+            <input class="form-control" type="text" name="CommentUserName" placeholder="Adınız Soyadınız" required="">
+            <input class="form-control" type="text" name="CommentTitle" placeholder="Başlık" required="">
+            <input class="form-control" type="text" name="BlogScore" placeholder="Başlık" required="">
+            <textarea class="form-control" name="CommnetContent" placeholder="Yorumunuz..." required=""></textarea>
+            <button type="submit" class="btn btn-primary submit">Submit</button>
+        </form>
+    </div>
+</div>*@
+
+@*@model ASPNETCOREBlogProject.Models.AddCommentViewModel
+
+<form asp-action="PartialAddComment" method="post">
+    <div class="form-group">
+        <label asp-for="CommentUserName">Name</label>
+        <input asp-for="CommentUserName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="CommentTitle">Başlık</label>
+        <input asp-for="CommentTitle" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="CommnetContent">Comment</label>
+        <textarea asp-for="CommnetContent" class="form-control"></textarea>
+    </div>
+    <input type="hidden" name="BlogId" value="@ViewBag.blogId" />
+    <button type="submit" class="btn btn-primary">Add Comment</button>
+</form>
+*@
