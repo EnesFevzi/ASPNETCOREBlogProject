@@ -16,15 +16,25 @@ namespace BlogProject1.DataAccessLayer.Concrete.EntityFramework
         {
 
         }
+
         public List<WriterMessage> GetInboxtWithMessageByWriter(int id)
         {
-            return _context.Message2s.Include(x => x.WriterSender).Where(y => y.ReceiverId == id).ToList();
+            throw new NotImplementedException();
         }
 
         public List<WriterMessage> GetSendBoxWithMessageByWriter(int id)
         {
-           return _context.Message2s.Include(x => x.WriterReceiver).Where(x => x.SenderId == id).ToList();
+            throw new NotImplementedException();
         }
+        //public List<WriterMessage> GetInboxtWithMessageByWriter(int id)
+        //{
+        //    return _context.WriterMessages.Include(x => x.SenderUser).Where(y => y.ReceiverUserId == id).ToList();
+        //}
+
+        //public List<WriterMessage> GetSendBoxWithMessageByWriter(int id)
+        //{
+        //   return _context.WriterMessages.Include(x => x.ReceiverUser).Where(x => x.SenderUserId == id).ToList();
+        //}
 
     }
 }

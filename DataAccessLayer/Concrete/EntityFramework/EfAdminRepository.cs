@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace BlogProject1.DataAccessLayer.Concrete.EntityFramework
 {
-	public class EfAdminRepository : GenericRepository<Admin>, IAdminRepository
-	{
-		public EfAdminRepository(TContext context) : base(context)
-		{
-		}
-	}
+    public class EfAdminRepository : GenericRepository<Admin>, IAdminRepository
+    {
+        public EfAdminRepository(TContext context) : base(context)
+        {
+        }
+    }
 }

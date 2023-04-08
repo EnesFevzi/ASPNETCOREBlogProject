@@ -8,8 +8,7 @@ namespace ASPNETCOREBlogProject.Controllers
 {
 	public class AboutController : Controller
 	{
-		//AboutManager aboutManager= new AboutManager(new EfAboutRepository(new TContext()));
-
+		//AboutManager aboutManager= new AboutManager(new EfAboutRepository(new TContext()))
 		private readonly IAboutService _aboutService;
 
         public AboutController(IAboutService aboutService)

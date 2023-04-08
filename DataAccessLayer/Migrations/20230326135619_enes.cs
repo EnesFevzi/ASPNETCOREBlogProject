@@ -207,6 +207,26 @@ namespace BlogProject1.DataAccessLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "WriterMessages",
+                columns: table => new
+                {
+                    WriterMessageID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Sender = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Receiver = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SenderName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReceiverName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Subject = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MessageContent = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MessageDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    MessageStatus = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WriterMessages", x => x.WriterMessageID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -313,40 +333,6 @@ namespace BlogProject1.DataAccessLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Message2s",
-                columns: table => new
-                {
-                    WriterMessageID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SenderId = table.Column<int>(type: "int", nullable: false),
-                    ReceiverId = table.Column<int>(type: "int", nullable: false),
-                    Sender = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Receiver = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SenderName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ReceiverName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Subject = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MessageDetails = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MessageDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MessageStatus = table.Column<bool>(type: "bit", nullable: false),
-                    SenderUserId = table.Column<int>(type: "int", nullable: false),
-                    ReceiverUserId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Message2s", x => x.WriterMessageID);
-                    table.ForeignKey(
-                        name: "FK_Message2s_AspNetUsers_ReceiverId",
-                        column: x => x.ReceiverId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Message2s_AspNetUsers_SenderId",
-                        column: x => x.SenderId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Blogs",
                 columns: table => new
                 {
@@ -390,23 +376,16 @@ namespace BlogProject1.DataAccessLayer.Migrations
                     CommentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CommentStatus = table.Column<bool>(type: "bit", nullable: false),
                     BlogScore = table.Column<int>(type: "int", nullable: false),
-                    BlogID = table.Column<int>(type: "int", nullable: false),
-                    WriterUserId = table.Column<int>(type: "int", nullable: true)
+                    BlogID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.CommentID);
                     table.ForeignKey(
-                        name: "FK_Comments_AspNetUsers_WriterUserId",
-                        column: x => x.WriterUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_Comments_Blogs_BlogID",
                         column: x => x.BlogID,
                         principalTable: "Blogs",
-                        principalColumn: "BlogID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "BlogID");
                 });
 
             migrationBuilder.CreateIndex(
@@ -462,21 +441,6 @@ namespace BlogProject1.DataAccessLayer.Migrations
                 name: "IX_Comments_BlogID",
                 table: "Comments",
                 column: "BlogID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comments_WriterUserId",
-                table: "Comments",
-                column: "WriterUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Message2s_ReceiverId",
-                table: "Message2s",
-                column: "ReceiverId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Message2s_SenderId",
-                table: "Message2s",
-                column: "SenderId");
         }
 
         /// <inheritdoc />
@@ -513,9 +477,6 @@ namespace BlogProject1.DataAccessLayer.Migrations
                 name: "Contacts");
 
             migrationBuilder.DropTable(
-                name: "Message2s");
-
-            migrationBuilder.DropTable(
                 name: "Messages");
 
             migrationBuilder.DropTable(
@@ -526,6 +487,9 @@ namespace BlogProject1.DataAccessLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "SocialMedias");
+
+            migrationBuilder.DropTable(
+                name: "WriterMessages");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

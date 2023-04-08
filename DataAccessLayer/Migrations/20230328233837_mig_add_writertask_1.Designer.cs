@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogProject1.DataAccessLayer.Migrations
 {
     [DbContext(typeof(TContext))]
-    [Migration("20230318204644_enes")]
-    partial class enes
+    [Migration("20230328233837_mig_add_writertask_1")]
+    partial class mig_add_writertask_1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -224,14 +224,9 @@ namespace BlogProject1.DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("WriterUserId")
-                        .HasColumnType("int");
-
                     b.HasKey("CommentID");
 
                     b.HasIndex("BlogID");
-
-                    b.HasIndex("WriterUserId");
 
                     b.ToTable("Comments");
                 });
@@ -397,12 +392,12 @@ namespace BlogProject1.DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WriterMessageID"));
 
-                    b.Property<DateTime>("MessageDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("MessageDetails")
+                    b.Property<string>("MessageContent")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("MessageDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("MessageStatus")
                         .HasColumnType("bit");
@@ -411,29 +406,17 @@ namespace BlogProject1.DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ReceiverId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ReceiverName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ReceiverUserId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Sender")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SenderId")
-                        .HasColumnType("int");
-
                     b.Property<string>("SenderName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SenderUserId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Subject")
                         .IsRequired()
@@ -441,11 +424,7 @@ namespace BlogProject1.DataAccessLayer.Migrations
 
                     b.HasKey("WriterMessageID");
 
-                    b.HasIndex("ReceiverId");
-
-                    b.HasIndex("SenderId");
-
-                    b.ToTable("Message2s");
+                    b.ToTable("WriterMessages");
                 });
 
             modelBuilder.Entity("BlogProject1.EntityLayer.Concrete.WriterRole", b =>
@@ -476,6 +455,41 @@ namespace BlogProject1.DataAccessLayer.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("BlogProject1.EntityLayer.Concrete.WriterTask", b =>
+                {
+                    b.Property<int>("WriterTaskID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WriterTaskID"));
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("TaskCreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TaskDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TaskName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("WriterID")
+                        .HasColumnType("int");
+
+                    b.HasKey("WriterTaskID");
+
+                    b.HasIndex("WriterID");
+
+                    b.ToTable("WriterTasks");
                 });
 
             modelBuilder.Entity("BlogProject1.EntityLayer.Concrete.WriterUser", b =>
@@ -685,31 +699,20 @@ namespace BlogProject1.DataAccessLayer.Migrations
                     b.HasOne("BlogProject1.EntityLayer.Concrete.Blog", "Blog")
                         .WithMany("Comments")
                         .HasForeignKey("BlogID")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("BlogProject1.EntityLayer.Concrete.WriterUser", null)
-                        .WithMany("Comments")
-                        .HasForeignKey("WriterUserId");
 
                     b.Navigation("Blog");
                 });
 
-            modelBuilder.Entity("BlogProject1.EntityLayer.Concrete.WriterMessage", b =>
+            modelBuilder.Entity("BlogProject1.EntityLayer.Concrete.WriterTask", b =>
                 {
-                    b.HasOne("BlogProject1.EntityLayer.Concrete.WriterUser", "WriterReceiver")
-                        .WithMany("WriterReceiver")
-                        .HasForeignKey("ReceiverId")
+                    b.HasOne("BlogProject1.EntityLayer.Concrete.WriterUser", "Writer")
+                        .WithMany("Tasks")
+                        .HasForeignKey("WriterID")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BlogProject1.EntityLayer.Concrete.WriterUser", "WriterSender")
-                        .WithMany("WriterSender")
-                        .HasForeignKey("SenderId")
-                        .IsRequired();
-
-                    b.Navigation("WriterReceiver");
-
-                    b.Navigation("WriterSender");
+                    b.Navigation("Writer");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -777,11 +780,7 @@ namespace BlogProject1.DataAccessLayer.Migrations
                 {
                     b.Navigation("Blogs");
 
-                    b.Navigation("Comments");
-
-                    b.Navigation("WriterReceiver");
-
-                    b.Navigation("WriterSender");
+                    b.Navigation("Tasks");
                 });
 #pragma warning restore 612, 618
         }

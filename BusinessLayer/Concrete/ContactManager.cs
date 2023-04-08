@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BlogProject1.BusinessLayer.Concrete
 {
-    public class ContactManager : IGenericService<Contact>
+    public class ContactManager : IContactService
     {
         protected readonly IContactRepository _contactRepository;
 

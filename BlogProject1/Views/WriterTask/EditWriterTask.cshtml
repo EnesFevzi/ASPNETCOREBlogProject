@@ -1,0 +1,44 @@
+﻿@model BlogProject1.EntityLayer.Concrete.WriterTask
+@{
+    ViewData["Title"] = "EditWriterTask";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+@using (Html.BeginForm("EditWriterTask", "WriterTask", FormMethod.Post))
+{
+<div class="form-group">
+    <label asp-for="TaskName" class="control-label"></label>
+    <input asp-for="TaskName" class="form-control" />
+    <span asp-validation-for="TaskName" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="TaskDescription" class="control-label"></label>
+    <textarea asp-for="TaskDescription" class="form-control"></textarea>
+    <span asp-validation-for="TaskDescription" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="IsCompleted" class="control-label"></label>
+    <input asp-for="IsCompleted" type="checkbox" />
+    <span asp-validation-for="IsCompleted" class="text-danger"></span>
+</div>
+<button class="btn btn-success">Güncelle</button>
+}
+
+@*@using (Html.BeginForm("EditWriterTask", "WriterTask", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.WriterTaskID)
+    @Html.LabelFor(x => x.TaskName)
+    @Html.TextBoxFor(x => x.TaskName, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.TaskName)
+    <br />
+    @Html.LabelFor(x => x.TaskDescription)
+    @Html.TextBoxFor(x => x.TaskDescription, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.TaskDescription)
+    <br />
+    @Html.LabelFor(x => x.IsCompleted)
+    @Html.DropDownListFor(x => x.IsCompleted, new SelectList(Enum.GetValues(typeof(TaskStatus))), "Durum Seçiniz", new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.IsCompleted)
+    <br />
+    <button class="btn btn-info">Görevi Kaydet</button>
+}*@

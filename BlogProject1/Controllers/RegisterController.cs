@@ -27,20 +27,32 @@ namespace ASPNETCOREBlogProject.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<IActionResult> Index(UserRegisterViewModel p)
+        public async Task<IActionResult> Index(UserRegisterViewModel userRegisterViewModel)
         {
+            if (userRegisterViewModel.Picture != null)
+            {
+                var extension = Path.GetExtension(userRegisterViewModel.Picture.FileName);
+                var imagename = Guid.NewGuid() + extension;
+                var savelocation = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WriterImageFiles/", imagename);
+                using (var stream = new FileStream(savelocation, FileMode.Create))
+                {
+                    await userRegisterViewModel.Picture.CopyToAsync(stream);
+                }
+                userRegisterViewModel.PictureURL = imagename;
+            }
+
             WriterUser appUser = new WriterUser()
             {
-                Name = p.Name,
-                Surname = p.Surname,
-                Email = p.Mail,
-                UserName = p.UserName,
-                ImageUrl = p.ImageUrl
+                Name = userRegisterViewModel.PictureURL,
+                Surname = userRegisterViewModel.PictureURL,
+                Email = userRegisterViewModel.PictureURL,
+                UserName = userRegisterViewModel.PictureURL,
+                ImageUrl = userRegisterViewModel.PictureURL
             };
 
-            if (p.Password == p.ConfirmPassword)
+            if (userRegisterViewModel.PictureURL == userRegisterViewModel.PictureURL)
             {
-                var result = await _userManager.CreateAsync(appUser, p.Password);
+                var result = await _userManager.CreateAsync(appUser, userRegisterViewModel.PictureURL);
 
                 if (result.Succeeded)
                 {
@@ -54,7 +66,7 @@ namespace ASPNETCOREBlogProject.Controllers
                     }
                 }
             }
-            return View(p);
+            return View(userRegisterViewModel);
         }
     }
 }

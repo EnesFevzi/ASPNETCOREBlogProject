@@ -10,8 +10,10 @@ namespace ASPNETCOREBlogProject.Models
         [Required(ErrorMessage = "Lütfen soyadınızı Girin")]
         public string Surname { get; set; }
 
-        [Required(ErrorMessage = "Lütfen resim url değeri Girin")]
-        public string ImageUrl { get; set; }
+        [Required(ErrorMessage = "Lütfen Resim Yükleyiniz")]
+        //public string ImageUrl { get; set; }
+        public string PictureURL { get; set; }
+        public IFormFile? Picture { get; set; }
 
         [Required(ErrorMessage = "Lütfen Kullanıcı Adını Girin")]
         public string UserName { get; set; }

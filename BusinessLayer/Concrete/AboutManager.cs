@@ -12,7 +12,7 @@ namespace BlogProject1.BusinessLayer.Concrete
 {
 	public class AboutManager : IAboutService
 	{
-		protected readonly IAboutRepository _aboutRepository;
+		private readonly IAboutRepository _aboutRepository;
 
 		public AboutManager(IAboutRepository aboutRepository)
 		{

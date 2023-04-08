@@ -1,0 +1,26 @@
+﻿@model BlogProject1.EntityLayer.Concrete.WriterTask
+@{
+    ViewData["Title"] = "AddWriterTask";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+<h1>Yeni Görev Oluştur</h1>
+@using (Html.BeginForm("AddWriterTask", "WriterTask", FormMethod.Post))
+{
+    @Html.Label("Görev Adı")
+    @Html.TextBoxFor(x=>x.TaskName, new {@class = "form-control"})
+    @Html.ValidationMessageFor(x=>x.TaskName)
+    <br />
+    @Html.Label("Görev İçeriği")
+    @Html.TextBoxFor(x=>x.TaskDescription, new {@class = "form-control"})
+    @Html.ValidationMessageFor(x=>x.TaskDescription)
+    <br />
+    <div class="form-group">
+        <label asp-for="IsCompleted" class="control-label">Tamamlanma</label>
+        <input asp-for="IsCompleted" type="checkbox" />
+        <span asp-validation-for="IsCompleted" class="text-danger"></span>
+    </div>
+    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+    <button class="btn btn-info">Görevi Kaydet</button>
+}
+

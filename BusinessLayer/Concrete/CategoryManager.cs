@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BlogProject1.BusinessLayer.Concrete
 {
-    public class CategoryManager : IGenericService<Category>
+    public class CategoryManager : ICategoryService
     {
 		protected readonly ICategoryRepository _categoryRepository;
 
@@ -62,6 +62,10 @@ namespace BlogProject1.BusinessLayer.Concrete
         public void TUpdate(Category entity)
         {
             throw new NotImplementedException();
+        }
+        public List<Category> GetList()
+        {
+            return _categoryRepository.GetListAll();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BlogProject1.BusinessLayer.Abstract;
 using BlogProject1.DataAccessLayer.Abstract;
+using BlogProject1.DataAccessLayer.Concrete.EntityFramework;
 using BlogProject1.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BlogProject1.BusinessLayer.Concrete
 {
-    public class WriterMessageManager : IGenericService<WriterMessage>
+    public class WriterMessageManager : IWriterMessageService
     {
         private readonly IWriterMessageRepository _message2Repository;
 
@@ -26,7 +27,7 @@ namespace BlogProject1.BusinessLayer.Concrete
 
         public void TAdd(WriterMessage entity)
         {
-            throw new NotImplementedException();
+            _message2Repository.Add(entity);
         }
 
         public void TDelete(WriterMessage entity)
@@ -75,5 +76,6 @@ namespace BlogProject1.BusinessLayer.Concrete
         {
             return _message2Repository.GetByFilter(x => x.Sender == p);
         }
+
     }
 }

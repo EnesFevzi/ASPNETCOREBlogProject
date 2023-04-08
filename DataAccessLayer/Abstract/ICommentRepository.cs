@@ -10,6 +10,6 @@ namespace BlogProject1.DataAccessLayer.Abstract
 {
 	public interface ICommentRepository:IGenericRepository<Comment>
 	{
-
+        List<Comment> GetListWithBlog();
     }
 }

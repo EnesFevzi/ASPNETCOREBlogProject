@@ -21,5 +21,9 @@ namespace BlogProject1.DataAccessLayer.Concrete.EntityFramework
             return _context.Blogs.Include(x => x.Comments).Where(x => x.BlogID == id).ToList();
         }
 
+        public List<Comment> GetListWithBlog()
+        {
+           return _context.Comments.Include(x => x.Blog).ToList();
+        }
     }
 }

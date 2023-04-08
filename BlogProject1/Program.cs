@@ -1,11 +1,16 @@
 using BlogProject1.BusinessLayer.Abstract;
 using BlogProject1.BusinessLayer.Concrete;
+using BlogProject1.BusinessLayer.Extensions;
 using BlogProject1.BusinessLayer.ValidationRules;
+using BlogProject1.DataAccessLayer.Abstract;
 using BlogProject1.DataAccessLayer.Concrete;
+using BlogProject1.DataAccessLayer.Concrete.EntityFramework;
+using BlogProject1.DataAccessLayer.Extensions;
 using BlogProject1.EntityLayer.Concrete;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 
 
@@ -15,9 +20,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddDbContext<TContext>();
-builder.Services.AddIdentity<WriterUser, WriterRole>().AddEntityFrameworkStores<TContext>();
+builder.Services.AddIdentity<WriterUser, WriterRole>().AddEntityFrameworkStores<TContext>().AddDefaultTokenProviders(); 
 builder.Services.AddControllersWithViews();
-//builder.Services.AddScoped<IAboutService, AboutManager>();
+builder.Services.AddScoped<UserManager<WriterUser>>();
+builder.Services.AddScoped<RoleManager<WriterRole>>();
+
+builder.Services.AddAuthorization();
+builder.Services.LoadDataLayerExtension();
+builder.Services.LoadServiceLayerExtension();
+
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddSession();
 
@@ -34,13 +45,13 @@ builder.Services.AddMvc(config =>
     config.Filters.Add(new AuthorizeFilter(policy));
 
 });
-//builder.Services.AddAuthentication(
-//                CookieAuthenticationDefaults.AuthenticationScheme)
-//                .AddCookie(x =>
-//                {
-//                    x.LoginPath = "/Login/Index";
-//                }
-//            );
+builder.Services.AddAuthentication(
+                CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(x =>
+                {
+                    x.LoginPath = "/Login/Index";
+                }
+            );
 
 
 
@@ -83,5 +94,13 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
+});
 
 app.Run();

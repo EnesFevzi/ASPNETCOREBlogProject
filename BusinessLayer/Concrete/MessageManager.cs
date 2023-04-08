@@ -64,6 +64,8 @@ namespace BlogProject1.BusinessLayer.Concrete
             return _messageRepository.GetByFilter(x => x.Receiver == p);
         }
 
+       
+
 
 
     }

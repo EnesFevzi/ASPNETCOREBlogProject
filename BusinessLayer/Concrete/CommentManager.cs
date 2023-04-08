@@ -70,6 +70,10 @@ namespace BlogProject1.BusinessLayer.Concrete
         {
             return await _commentRepository.GetListAllAsync(x => x.BlogID == id);
         }
+        public List<Comment> GetCommentWithBlog()
+        {
+            return _commentRepository.GetListWithBlog();
+        }
 
     }
 }

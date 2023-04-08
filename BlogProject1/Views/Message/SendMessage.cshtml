@@ -1,16 +1,40 @@
 ﻿@model BlogProject1.EntityLayer.Concrete.WriterMessage
 @{
     ViewData["Title"] = "SendMessage";
-    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml"; /*string receiver = "";*/
+    //if (Model != null)
+    //{
+    //    receiver = Model.WriterReceiver.UserName;
+    //}
+    //if (ViewBag.WriterReceiver != null)
+    //{
+    //    receiver = ViewBag.WriterReceiver;
+    //}
 }
 
-<h1>Yeni Mesaj Oluştur</h1>
+<h1>Yeni Mesaj Gönderme Sayfası</h1>
+<br />
+<form class="form-group" method="post">
+    @Html.Label("Alıcı Mail")
+    @Html.TextBoxFor(x => x.Receiver, new { @class = "form-control" })
+    <br />
+    @Html.Label("Konu")
+    @Html.TextBoxFor(x => x.Subject, new { @class = "form-control" })
+    <br />
+    @Html.Label("Mesaj")
+    @Html.TextAreaFor(x => x.MessageContent, 10, 3, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-outline-primary">Gönder</button>
+</form>
+
+
+@*<h1>Yeni Mesaj Oluştur</h1>
 <br />
 @using (Html.BeginForm("SendMessage", "Message", FormMethod.Post))
 {
-    @Html.Label("Alıcı")
-    @*    @Html.TextBoxFor(x=>x.Subject, new {@class = "form-control"})*@
-    <input type="text" class="form-contol" />
+    @Html.Label("Alıcı Mail Adresi yada Kullanıcı Adı")
+    <input type="text" name="Receiver" id="Receiver" value="@receiver" class="form-control">
+    @Html.ValidationMessageFor(x => x.WriterReceiver, "", new { @class = "text-danger" })
     <br />
     @Html.Label("Konu")
     @Html.TextBoxFor(x=>x.Subject, new {@class = "form-control"})
@@ -21,5 +45,5 @@
     @Html.ValidationMessageFor(x=>x.MessageDetails)
     <br />
     <button class="btn btn-info">Mesajı Gönder</button>
-}
+}*@
 

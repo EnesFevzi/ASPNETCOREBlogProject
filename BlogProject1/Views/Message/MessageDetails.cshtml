@@ -6,14 +6,17 @@
 
 <h1>Mesaj Detay Sayfası</h1>
 
-@Html.Label("Mesaj ID")
-@Html.TextBoxFor(x=>x.WriterMessageID, new {@class = "form-control"})
+@*@Html.Label("Mesaj ID")*@
+@Html.HiddenFor(x => x.WriterMessageID, new { @class = "form-control" })
+<br />
+@Html.Label("Gönderen Adı")
+@Html.TextAreaFor(x => x.SenderName, new { @class = "form-control" })
 <br />
 @Html.Label("Mesaj Başlığı")
 @Html.TextBoxFor(x=>x.MessageStatus, new {@class = "form-control"})
 <br />
 @Html.Label("Mesaj İçeriği")
-@Html.TextAreaFor(x=>x.MessageDetails,20,3, new {@class = "form-control"})
+@Html.TextAreaFor(x=>x.MessageContent,20,3, new {@class = "form-control"})
 <br />
 <button class="btn btn-success">Mesajlara Dön</button>
 
