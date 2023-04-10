@@ -19,9 +19,9 @@ namespace BlogProject1.BusinessLayer.Concrete
 			_categoryRepository = categoryRepository;
 		}
 
-        public List<int> GetCountAsync(Expression<Func<Category, bool>> filter)
+        public async Task<int> GetCountAsync(Expression<Func<Category, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            return await _categoryRepository.GetCountAsync(filter);
         }
 
         public void TAdd(Category entity)
@@ -67,5 +67,7 @@ namespace BlogProject1.BusinessLayer.Concrete
         {
             return _categoryRepository.GetListAll();
         }
+
+        
     }
 }

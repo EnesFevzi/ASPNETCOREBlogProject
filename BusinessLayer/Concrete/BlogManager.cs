@@ -31,9 +31,9 @@ namespace BlogProject1.BusinessLayer.Concrete
             return _blogRepository.GetBlogsListWithCategory();
         }
 
-        public List<int> GetCountAsync(Expression<Func<Blog, bool>> filter)
+        public async Task<int> GetCountAsync(Expression<Func<Blog, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            return await _blogRepository.GetCountAsync(filter);
         }
 
         public void TAdd(Blog entity)

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BlogProject1.BusinessLayer.Concrete
 {
-    public class NotificationManager : IGenericService<Notification>
+    public class NotificationManager : INotificationService
     {
         protected readonly INotificationRepository _notificationRepository;
 
@@ -55,6 +55,11 @@ namespace BlogProject1.BusinessLayer.Concrete
         }
 
         public void TUpdate(Notification entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<int> IGenericService<Notification>.GetCountAsync(Expression<Func<Notification, bool>> filter)
         {
             throw new NotImplementedException();
         }

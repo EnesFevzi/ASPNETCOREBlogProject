@@ -64,5 +64,10 @@ namespace BlogProject1.BusinessLayer.Concrete
         {
            _writerTaskRepository.Update(entity);
         }
+
+        Task<int> IGenericService<WriterTask>.GetCountAsync(Expression<Func<WriterTask, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

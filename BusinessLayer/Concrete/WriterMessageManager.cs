@@ -77,5 +77,9 @@ namespace BlogProject1.BusinessLayer.Concrete
             return _message2Repository.GetByFilter(x => x.Sender == p);
         }
 
+        Task<int> IGenericService<WriterMessage>.GetCountAsync(Expression<Func<WriterMessage, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

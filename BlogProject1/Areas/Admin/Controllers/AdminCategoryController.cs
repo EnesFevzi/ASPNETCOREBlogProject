@@ -59,9 +59,46 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
 
         public IActionResult CategoryDelete(int id)
         {
-            var value = cm.TGetByID(id);
-            cm.TDelete(value);
+            var value = _categoryService.TGetByID(id);
+            _categoryService.TDelete(value);
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public IActionResult EditCategory(int id)
+        {
+            var category = _categoryService.TGetByID(id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            return View(category);
+        }
+
+        [HttpPost]
+        public IActionResult EditCategory(Category category)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(category);
+            }
+
+            var existingCategory = _categoryService.TGetByID(category.CategoryID);
+
+            if (existingCategory == null)
+            {
+                return NotFound();
+            }
+
+            existingCategory.CategoryName = category.CategoryName;
+            existingCategory.CategoryDescription = category.CategoryDescription;
+
+            _categoryService.TUpdate(existingCategory);
+
+            return RedirectToAction("Index", "Category");
+        }
+
+
     }
 }

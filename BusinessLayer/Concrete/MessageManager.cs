@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BlogProject1.BusinessLayer.Concrete
 {
-    public class MessageManager : IGenericService<Message>
+    public class MessageManager : IMessageService
     {
         private readonly IMessageRepository _messageRepository;
 
@@ -64,9 +64,14 @@ namespace BlogProject1.BusinessLayer.Concrete
             return _messageRepository.GetByFilter(x => x.Receiver == p);
         }
 
-       
+        List<WriterMessage> IMessageService.GetInboxListByWriter(string p)
+        {
+            throw new NotImplementedException();
+        }
 
-
-
+        Task<int> IGenericService<Message>.GetCountAsync(Expression<Func<Message, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

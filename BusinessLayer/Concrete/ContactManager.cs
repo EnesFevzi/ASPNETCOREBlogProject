@@ -58,5 +58,10 @@ namespace BlogProject1.BusinessLayer.Concrete
         {
             throw new NotImplementedException();
         }
+
+        Task<int> IGenericService<Contact>.GetCountAsync(Expression<Func<Contact, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

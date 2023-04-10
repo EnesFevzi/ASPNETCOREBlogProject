@@ -15,5 +15,7 @@ namespace BlogProject1.EntityLayer.Concrete
 
 		//Navigation Prop
 		public List<Blog> Blog { get; set; }
+		public List<News> News { get; set; }
+		public List<Video> Video { get; set; }
 	}
 }

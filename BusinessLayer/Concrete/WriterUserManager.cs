@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BlogProject1.BusinessLayer.Concrete
 {
-    public class WriterUserManager : IGenericService<WriterUser>
+    public class WriterUserManager : IWriterUserService
     {
         private readonly IWriterUserRepository _userRepository;
 
@@ -62,6 +62,11 @@ namespace BlogProject1.BusinessLayer.Concrete
         public List<WriterUser> GetWriterByID(int id)
         {
             return _userRepository.GetByFilter(x => x.Id == id);
+        }
+
+        Task<int> IGenericService<WriterUser>.GetCountAsync(Expression<Func<WriterUser, bool>> filter)
+        {
+            throw new NotImplementedException();
         }
     }
 }

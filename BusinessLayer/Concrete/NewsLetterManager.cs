@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BlogProject1.BusinessLayer.Concrete
 {
-    public class NewsLetterManager : IGenericService<NewsLetter>
+    public class NewsLetterManager : INewsLetterService
     {
         protected readonly INewsLetterRepository _newsLetterRepository;
 
@@ -55,6 +55,11 @@ namespace BlogProject1.BusinessLayer.Concrete
         }
 
         public void TUpdate(NewsLetter entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<int> IGenericService<NewsLetter>.GetCountAsync(Expression<Func<NewsLetter, bool>> filter)
         {
             throw new NotImplementedException();
         }

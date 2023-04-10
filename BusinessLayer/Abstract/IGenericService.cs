@@ -17,7 +17,7 @@ namespace BlogProject1.BusinessLayer.Abstract
         T TGetByID(int id);
         List<T> TGetList();
 		List<T> TGetByFilter(Expression<Func<T, bool>> filter);
-		List<int> GetCountAsync(Expression<Func<T, bool>> filter);
+        Task<int> GetCountAsync(Expression<Func<T, bool>> filter = null);
 
 
 

@@ -2,10 +2,12 @@
 using BlogProject1.DataAccessLayer.Concrete;
 using BlogProject1.DataAccessLayer.Concrete.EntityFramework;
 using BlogProject1.EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASPNETCOREBlogProject.Controllers
 {
+    [AllowAnonymous]
     public class ContactController : Controller
     {
         ContactManager contactManager = new ContactManager(new EfContactRepository(new TContext()));
@@ -23,7 +25,7 @@ namespace ASPNETCOREBlogProject.Controllers
             contact.ContactDate = DateTime.Parse(DateTime.Now.ToShortDateString());
             contact.ContactStatus = true;
             contactManager.TAdd(contact);
-            return RedirectToAction("Index", "Blog");
+            return RedirectToAction("Index", "Contact");
         }
     }
 }

@@ -62,6 +62,8 @@ namespace BlogProject1.DataAccessLayer.Concrete
 		public DbSet<NewsLetter> NewsLetters { get; set; }
 		public DbSet<WriterUser> WriterUsers { get; set; }
 		public DbSet<WriterTask> WriterTasks { get; set; }
+		public DbSet<Video> Videos { get; set; }
+		public DbSet<News> Newss { get; set; }
 		
 	}
 }

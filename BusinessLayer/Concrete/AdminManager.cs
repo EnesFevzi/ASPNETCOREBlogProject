@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BlogProject1.BusinessLayer.Concrete
 {
-	public class AdminManager : IGenericService<Admin>
+	public class AdminManager : IAdminService
     {
         protected readonly IAdminRepository _adminRepository;
 
@@ -60,6 +60,11 @@ namespace BlogProject1.BusinessLayer.Concrete
         }
 
         public void TUpdate(Admin entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<int> IGenericService<Admin>.GetCountAsync(Expression<Func<Admin, bool>> filter)
         {
             throw new NotImplementedException();
         }

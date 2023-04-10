@@ -75,5 +75,9 @@ namespace BlogProject1.BusinessLayer.Concrete
             return _commentRepository.GetListWithBlog();
         }
 
+        Task<int> IGenericService<Comment>.GetCountAsync(Expression<Func<Comment, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
