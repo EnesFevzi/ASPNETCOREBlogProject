@@ -2,13 +2,18 @@
 using BlogProject1.BusinessLayer.ValidationRules;
 using BlogProject1.DataAccessLayer.Concrete;
 using BlogProject1.EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Data;
 
 namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
 {
-    public class AdminNewController : Controller
+    [Area("Admin")]
+    [Route("Admin/[controller]")]
+    [Authorize(Roles = "Admin")]
+    public class NewController : Controller
     {
         protected readonly INewService _newService;
         protected readonly ICategoryService _categoryService;
@@ -17,7 +22,7 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
         private readonly IWriterTaskService _writerTaskService;
         protected readonly TContext _context;
 
-        public AdminNewController(INewService newService, ICategoryService categoryService, IWebHostEnvironment hostingEnvironment, 
+        public NewController(INewService newService, ICategoryService categoryService, IWebHostEnvironment hostingEnvironment, 
             UserManager<WriterUser> userManager, IWriterTaskService writerTaskService, TContext context)
         {
             _newService = newService;
@@ -33,9 +38,21 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
             var values = _newService.GetNewListWithCategory();
             return View(values);
         }
+        [Route("NewsListByWriter")]
+        public IActionResult NewsListByWriter()
+        {
+            var username = User.Identity.Name;
+            var usermail = _context.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
+            var writerID = _context.WriterUsers.Where(x => x.Email == usermail).Select(y => y.Id).FirstOrDefault();
+            var values = _newService.GetNewsListWithWriter(writerID);
+            return View(values);
+        }
+
 
         [HttpGet]
-        public IActionResult BlogAdd()
+        [Route("")]
+        [Route("AddNew")]
+        public IActionResult AddNew()
         {
             List<SelectListItem> categoryvalues = (from x in _categoryService.TGetList()
                                                    select new SelectListItem
@@ -47,7 +64,13 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
             ViewBag.cv = categoryvalues;
             return View();
         }
+
+
+
+
         [HttpPost]
+        [Route("")]
+        [Route("AddNew")]
         public IActionResult AddNew(New b)
         {
             var username = User.Identity.Name;
@@ -64,7 +87,7 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
                 b.NewsCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
                 b.WriterID = writerID;
                 _newService.TAdd(b);
-                return RedirectToAction("VideoListByWriter", "AdminNew");
+                return RedirectToAction("NewsListByWriter", "New");
                 // Blog kaydetme işlemini gerçekleştirin  
             }
             else
@@ -79,13 +102,23 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
 
         }
 
+
+
+        [Route("")]
+        [Route("DeleteNew/{id}")]
         public IActionResult DeleteNew(int id)
         {
             var values = _newService.TGetByID(id);
             _newService.TDelete(values);
-            return RedirectToAction("BlogListByWriter", "Blog");
+            return RedirectToAction("NewsListByWriter", "New");
         }
+
+
+
+
         [HttpGet]
+        [Route("")]
+        [Route("EditNew/{id}")]
         public IActionResult EditNew(int id)
         {
             var values = _newService.TGetByID(id);
@@ -100,8 +133,12 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
 
             return View(values);
         }
+
+
         [HttpPost]
-        public IActionResult EditBlog(New b)
+        [Route("")]
+        [Route("EditNew/{id}")]
+        public IActionResult EditNew(New b)
         {
             var username = User.Identity.Name;
             var usermail = _context.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
@@ -110,7 +147,7 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
             b.NewsCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
             b.WriterID = writerID;
             _newService.TUpdate(b);
-            return RedirectToAction("BlogListByWriter", "Blog");
+            return RedirectToAction("NewsListByWriter", "New");
         }
     }
 }

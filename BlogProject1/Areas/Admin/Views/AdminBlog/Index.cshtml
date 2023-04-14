@@ -1,44 +1,111 @@
 ﻿@using BlogProject1.EntityLayer.Concrete
 @model List<Blog>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "BlogListByWriter";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<!DOCTYPE html>
-<html>
+<h1>Yazarın Blogları</h1>
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Blog Başlığı</th>
+        <th>Oluşturma Tarihi</th>
+        <th>Kategori</th>
+        <th>Durum</th>
+        <th>Sil</th>
+        <th>Düzenle</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.BlogID</th>
+            <td>@item.BlogTitle</td>
+            <td>@item.BlogCreateDate.ToShortDateString()</td>
+            <td>@item.Category.CategoryName</td>
+            <td>@item.BlogStatus</td>
+            <td>
+                <a href="/Blog/DeleteBlog/@item.BlogID" class="btn btn-danger"
+                   onclick="return confirm('Silmek istediğinize emin misiniz?')">Sil</a>
+            <td> <a href="/Blog/EditBlog/@item.BlogID" class="btn btn-warning">Düzenle</a></td>
+        </tr>
+    }
+</table>
+<a href="/Blog/BlogAdd/" class="btn btn-primary">Yeni Blog Oluştur</a>
 
-<body>
-    <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="col-md-3">
-                    <div class="ibox">
-                        <div class="ibox-content product-box">
-                            <img src="@item.BlogImage" height="225" width="240" />
-                            <div class="product-desc">
-                                <span class="product-price">
-                                    @item.BlogCreateDate.ToShortDateString()
-                                </span>
-                                <small class="text-muted">@item.Category.CategoryName</small>
-                                <a href="#" class="product-name"> @item.BlogTitle</a>
-                                <div class="small m-t-xs">
-                                    @item.BlogContent
-                                </div>
-                                <div class="m-t text-righ">
 
-                                    <a href="/Blog/BlogDetails/@item.BlogID" class="btn btn-xs btn-outline btn-primary">Detaylar <i class="fa fa-long-arrow-right"></i> </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<script>
+    $('.Sil').click(function (e) {
+        e.preventDefault();
+        var linkURL = $(this).attr("href");
+        Swal.fire({
+            title: 'UYARI!',
+            text: "Blog yazısını silmek istediğinize emin misiniz?",
+            icon: 'warning',
+            showCancelButton: true,
+            showCancelButton: true,
+            confirmButtonColor: '#5CBA6C',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Evet',
+            cancelButtonText: 'Hayır'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = linkURL;
+                Swal.fire(
+                    'Başarılı!',
+                    'Seçilen Blog Silindi .',
+                    'success'
+                )
             }
-        </div>
-    </div>
-</body>
+        })
+    });
 
-</html>
-
-
+    $('.DurumAktif').click(function (e) {
+        e.preventDefault();
+        var linkURL = $(this).attr("href");
+        Swal.fire({
+            title: 'UYARI!',
+            text: 'Blog Yazısını Aktif Hale Getirmek İstediğinizden Emin Misiniz ?',
+            icon: 'warning',
+            showCancelButton: true,
+            showCancelButton: true,
+            confirmButtonColor: '#5CBA6C',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Evet',
+            cancelButtonText: 'Hayır'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = linkURL;
+                Swal.fire(
+                    'Başarılı!',
+                    onayMesaji,
+                    'success'
+                )
+            }
+        })
+    });
+    $('.DurumPasif').click(function (e) {
+        e.preventDefault();
+        var linkURL = $(this).attr("href");
+        Swal.fire({
+            title: 'UYARI!',
+            text: 'Blog Yazısını Pasif Hale Getirmek İstediğinizden Emin Misiniz ?',
+            icon: 'warning',
+            showCancelButton: true,
+            showCancelButton: true,
+            confirmButtonColor: '#5CBA6C',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Evet',
+            cancelButtonText: 'Hayır'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = linkURL;
+                Swal.fire(
+                    'Başarılı!',
+                    onayMesaji,
+                    'success'
+                )
+            }
+        })
+    });
+</script>

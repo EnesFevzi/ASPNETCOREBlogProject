@@ -15,7 +15,6 @@ namespace BlogProject1.EntityLayer.Concrete
         public string NewContent { get; set; }
         public string NewThumbnailImage { get; set; }
         public string NewImage { get; set; }
-        public string FilePath { get; set; }
         public DateTime NewsCreateDate { get; set; }
         public bool NewStatus { get; set; }
 

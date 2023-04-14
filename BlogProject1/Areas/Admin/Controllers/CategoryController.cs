@@ -12,8 +12,8 @@ using X.PagedList;
 namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Route("Admin/[controller]/[action]")]
     [Authorize(Roles = "Admin")]
+    [Route("Admin/[controller]")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -22,6 +22,7 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
         {
             _categoryService = categoryService;
         }
+        [Route("Index")]
         public IActionResult Index(int page = 1)
         {
             var values = _categoryService.TGetList().ToPagedList(page, 10);
@@ -29,11 +30,15 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
             return View(values);
         }
         [HttpGet]
+        [Route("")]
+        [Route("AddCategory")]
         public IActionResult AddCategory()
         {
             return View();
         }
         [HttpPost]
+        [Route("")]
+        [Route("AddCategory")]
         public IActionResult AddCategory(Category category)
         {
 
@@ -43,7 +48,7 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
             {
                 category.CategoryStatus = true;
                 _categoryService.TAdd(category);
-                return RedirectToAction("Index", "Category");
+                return RedirectToAction("Index","Category");
             }
             else
             {
@@ -54,6 +59,8 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
             }
             return View();
         }
+        [Route("")]
+        [Route("CategoryDelete/{id}")]
         public IActionResult CategoryDelete(int id)
         {
             var value = _categoryService.TGetByID(id);
@@ -61,6 +68,8 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
+        [Route("")]
+        [Route("EditCategory/{id}")]
         public IActionResult EditCategory(int id)
         {
             var category = _categoryService.TGetByID(id);
@@ -72,8 +81,9 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
 
             return View(category);
         }
-        [Authorize(Roles = "Admin")]
         [HttpPost]
+        [Route("")]
+        [Route("EditCategory/{id}")]
         public IActionResult EditCategory(Category category)
         {
             if (!ModelState.IsValid)

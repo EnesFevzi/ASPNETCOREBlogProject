@@ -31,7 +31,7 @@ namespace BlogProject1.BusinessLayer.Concrete
 
         public void TDelete(Category entity)
         {
-            throw new NotImplementedException();
+            _categoryRepository.Delete(entity);
         }
 
         public List<Category> TGetByFilter(Expression<Func<Category, bool>> filter)
@@ -41,7 +41,7 @@ namespace BlogProject1.BusinessLayer.Concrete
 
         public Category TGetByID(int id)
         {
-            throw new NotImplementedException();
+            return _categoryRepository.GetByID(id);
         }
 
         public List<Category> TGetList()
@@ -61,7 +61,7 @@ namespace BlogProject1.BusinessLayer.Concrete
 
         public void TUpdate(Category entity)
         {
-            throw new NotImplementedException();
+            _categoryRepository.Update(entity);
         }
         public List<Category> GetList()
         {

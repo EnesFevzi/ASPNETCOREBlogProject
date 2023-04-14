@@ -1,0 +1,31 @@
+﻿@model BlogProject1.EntityLayer.Concrete.New
+@{
+    ViewData["Title"] = "AddNew";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Yeni Haber Oluştur</h1>
+@using (Html.BeginForm("AddNew", "New", FormMethod.Post))
+{
+    @Html.Label("Haber Başlığı")
+    @Html.TextBoxFor(x=>x.NewTitle, new {@class = "form-control"})
+    @Html.ValidationMessageFor(x=>x.NewTitle)
+    <br />
+    @Html.Label("Haber Görseli")
+    @Html.TextBoxFor(x=>x.NewImage, new {@class = "form-control"})
+    @Html.ValidationMessageFor(x=>x.NewImage)
+    <br />
+    @Html.Label("Haber Küçük Görsel")
+    @Html.TextBoxFor(x=>x.NewThumbnailImage, new {@class = "form-control"})
+    @Html.ValidationMessageFor(x=>x.NewImage)
+    <br />
+    @Html.Label("Blog Kategori")
+    @Html.DropDownListFor(x=>x.CategoryID,(List<SelectListItem>)ViewBag.cv, new{@class = "form-control"})
+    <br />
+    @Html.Label("Blog İçeriği")
+    @Html.TextAreaFor(x=>x.NewContent,15,3, new {@class = "form-control"})
+    @Html.ValidationMessageFor(x=>x.NewContent)
+    <br />
+    <button class="btn btn-info">Haberi Kaydet</button>
+}
+
