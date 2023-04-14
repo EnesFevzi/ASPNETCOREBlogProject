@@ -9,6 +9,7 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin,Moderator")]
+    
     public class AdminController : Controller
     {
         private readonly SignInManager<WriterUser> _signInManager;
@@ -24,13 +25,17 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var currentUser = _context.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
-            ViewBag.CurrentUser = currentUser;
+            
             return View();
         }
 
         public PartialViewResult AdminNavbarPartial()
+
         {
+            var usermail = User.Identity.Name;
+            ViewBag.mailName = usermail;
+            var writerName = _context.WriterUsers.Where(x => x.Email == usermail).Select(y => y.Name).FirstOrDefault();
+            ViewBag.writerName = writerName;
             return PartialView();
         }
     }

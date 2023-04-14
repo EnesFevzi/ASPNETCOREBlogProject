@@ -9,5 +9,8 @@ namespace BlogProject1.DataAccessLayer.Abstract
 {
     public interface IVideoRepository: IGenericRepository<Video>
     {
+        List<Video> GetVideosListWithCategory();
+        List<Video> GetListWithCategoryByWriter(int id);
+
     }
 }

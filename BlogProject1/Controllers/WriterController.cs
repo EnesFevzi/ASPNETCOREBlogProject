@@ -14,8 +14,6 @@ namespace ASPNETCOREBlogProject.Controllers
 {
     public class WriterController : Controller
     {
-        WriterUserManager writerManager = new WriterUserManager(new EfWriterUserRepository(new TContext()));
-
         private readonly UserManager<WriterUser> _userManager;
         private readonly TContext _context;
 
@@ -54,24 +52,23 @@ namespace ASPNETCOREBlogProject.Controllers
             model.PictureURL = values.ImageUrl;
 
 
-            string userName = !string.IsNullOrEmpty(values.Name) ? values.Name : User.Identity.Name;
-            values = await _userManager.FindByNameAsync(userName);
+            //string userName = !string.IsNullOrEmpty(values.Name) ? values.Name : User.Identity.Name;
+            //values = await _userManager.FindByNameAsync(userName);
             return View(model);
         }
-        [HttpPost]
+        [HttpPost] 
         public async Task<IActionResult> WriterEditProfile(UserEditViewModel userEditViewModel)
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
             if (userEditViewModel.Picture != null)
             {
+                var resource = Directory.GetCurrentDirectory();
                 var extension = Path.GetExtension(userEditViewModel.Picture.FileName);
                 var imagename = Guid.NewGuid() + extension;
-                var savelocation = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WriterImageFiles/", imagename);
-                using (var stream = new FileStream(savelocation, FileMode.Create))
-                {
-                    await userEditViewModel.Picture.CopyToAsync(stream);
-                }
+                var savelocation = resource + "/wwwroot/UserImage/" + imagename;
+                var stream = new FileStream(savelocation, FileMode.Create);
+                await userEditViewModel.Picture.CopyToAsync(stream);
                 user.ImageUrl = imagename;
             }
 

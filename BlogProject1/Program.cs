@@ -70,6 +70,13 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 
 });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Writer", policy =>
+    {
+        policy.RequireRole("Writer");
+    });
+});
 
 
 
@@ -91,16 +98,24 @@ app.UseSession();
 app.UseRouting();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Home}/{action=Index}/{id?}");
 app.UseEndpoints(endpoints =>
 {
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+
     endpoints.MapControllerRoute(
       name: "areas",
       pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
     );
 });
+
+//app.UseEndpoints(endpoints =>
+//{
+    
+//});
 
 app.Run();

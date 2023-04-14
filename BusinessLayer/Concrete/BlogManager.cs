@@ -15,7 +15,7 @@ namespace BlogProject1.BusinessLayer.Concrete
 {
 	public class BlogManager : IBlogService
 	{
-	    IBlogRepository _blogRepository;
+	    private readonly IBlogRepository _blogRepository;
 
         public BlogManager(IBlogRepository blogRepository)
         {

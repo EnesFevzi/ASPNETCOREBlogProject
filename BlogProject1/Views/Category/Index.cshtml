@@ -1,0 +1,31 @@
+﻿@using BlogProject1.EntityLayer.Concrete
+@model List<Category>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Kategori Adı</th>
+        <th>Durumu</th>
+        <th>Detaylar</th>
+        <th>Sil</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.CategoryID</td>
+            <td>@item.CategoryName</td>
+            <td>@item.CategoryStatus</td>
+            <td><a href="#" class="btn btn-warning">Detaylar</a> </td>
+            <td><a href="#" class="btn btn-warning">Sil</a> </td>
+
+        </tr>
+    }
+
+</table>
+

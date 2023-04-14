@@ -26,7 +26,7 @@ namespace BlogProject1.BusinessLayer.Concrete
 
         public void TAdd(Category entity)
         {
-            throw new NotImplementedException();
+            _categoryRepository.Add(entity);
         }
 
         public void TDelete(Category entity)

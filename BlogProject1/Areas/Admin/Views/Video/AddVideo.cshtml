@@ -1,0 +1,37 @@
+﻿@*@model BlogProject1.EntityLayer.Concrete.Video*@
+@model ASPNETCOREBlogProject.Areas.Admin.Models.AddVideoViewModel
+@{
+    ViewData["Title"] = "AddVideo";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Yeni Video Oluştur</h1>
+
+@using (Html.BeginForm("AddVideo", "Video", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.VideoTitle)
+        @Html.TextBoxFor(m => m.VideoTitle, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.VideoTitle)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.VideoContent)
+        @Html.TextAreaFor(m => m.VideoContent, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.VideoContent)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.CategoryID)
+        @Html.DropDownListFor(m => m.CategoryID, (IEnumerable<SelectListItem>)ViewBag.cv, "Select a category", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.CategoryID)
+    </div>
+
+    <div class="form-group">
+        <label for="VideoFile">Video File</label>
+        <input type="file" class="form-control" id="VideoURL" name="VideoURL" accept="video/*">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Video</button>
+}
+

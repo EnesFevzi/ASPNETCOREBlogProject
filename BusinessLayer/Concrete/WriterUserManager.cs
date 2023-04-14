@@ -2,6 +2,7 @@
 using BlogProject1.DataAccessLayer.Abstract;
 using BlogProject1.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,12 @@ namespace BlogProject1.BusinessLayer.Concrete
     public class WriterUserManager : IWriterUserService
     {
         private readonly IWriterUserRepository _userRepository;
+        private readonly UserManager<WriterUser> _userManager;
 
-        public WriterUserManager(IWriterUserRepository userRepository)
+        public WriterUserManager(IWriterUserRepository userRepository, UserManager<WriterUser> userManager)
         {
             _userRepository = userRepository;
+            _userManager = userManager;
         }
 
         public List<int> GetCountAsync(Expression<Func<WriterUser, bool>> filter)
@@ -67,6 +70,14 @@ namespace BlogProject1.BusinessLayer.Concrete
         Task<int> IGenericService<WriterUser>.GetCountAsync(Expression<Func<WriterUser, bool>> filter)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<int> GetByUserCountAsync(Expression<Func<WriterUser, bool>> filter = null)
+        {
+            if (filter == null)
+                return await _userManager.Users.CountAsync();
+            else
+                return await _userManager.Users.CountAsync(filter);
         }
     }
 }

@@ -13,14 +13,15 @@ namespace BlogProject1.EntityLayer.Concrete
         public int VideoID { get; set; }
         public string VideoTitle { get; set; }
         public string VideoContent { get; set; }
-        public string VideoThumbnailImage { get; set; }
-        public string VideoImage { get; set; }
         public DateTime VideoCreateDate { get; set; }
+        public string VideoURL { get; set; }
         public bool VideoStatus { get; set; }
 
         //Navigation Prop
 
         public int CategoryID { get; set; }
         public Category Category { get; set; }
+        public int WriterID { get; set; }
+        public WriterUser Writer { get; set; }
     }
 }

@@ -29,33 +29,35 @@ namespace ASPNETCOREBlogProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(UserRegisterViewModel userRegisterViewModel)
         {
-            if (userRegisterViewModel.Picture != null)
-            {
-                var extension = Path.GetExtension(userRegisterViewModel.Picture.FileName);
-                var imagename = Guid.NewGuid() + extension;
-                var savelocation = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WriterImageFiles/", imagename);
-                using (var stream = new FileStream(savelocation, FileMode.Create))
-                {
-                    await userRegisterViewModel.Picture.CopyToAsync(stream);
-                }
-                userRegisterViewModel.PictureURL = imagename;
-            }
 
             WriterUser appUser = new WriterUser()
             {
-                Name = userRegisterViewModel.PictureURL,
-                Surname = userRegisterViewModel.PictureURL,
-                Email = userRegisterViewModel.PictureURL,
-                UserName = userRegisterViewModel.PictureURL,
-                ImageUrl = userRegisterViewModel.PictureURL
+                Name = userRegisterViewModel.Name,
+                Surname = userRegisterViewModel.Surname,
+                Email = userRegisterViewModel.Mail,
+                UserName = userRegisterViewModel.UserName,
+                ImageUrl = userRegisterViewModel.ImageUrl,
             };
 
-            if (userRegisterViewModel.PictureURL == userRegisterViewModel.PictureURL)
+            if (userRegisterViewModel.Password == userRegisterViewModel.ConfirmPassword)
             {
-                var result = await _userManager.CreateAsync(appUser, userRegisterViewModel.PictureURL);
+                var result = await _userManager.CreateAsync(appUser, userRegisterViewModel.Password);
 
                 if (result.Succeeded)
                 {
+                    var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                    if (userRegisterViewModel.Picture != null)
+                    {
+                        var resource = Directory.GetCurrentDirectory();
+                        var extension = Path.GetExtension(userRegisterViewModel.Picture.FileName);
+                        var imagename = Guid.NewGuid() + extension;
+                        var savelocation = resource + "/wwwroot/UserImage/" + imagename;
+                        var stream = new FileStream(savelocation, FileMode.Create);
+                        await userRegisterViewModel.Picture.CopyToAsync(stream);
+                        user.ImageUrl = imagename;
+                        await _userManager.UpdateAsync(appUser); // Güncellenen satır
+                    }
+
                     return RedirectToAction("Index", "Login");
                 }
                 else
@@ -66,6 +68,7 @@ namespace ASPNETCOREBlogProject.Controllers
                     }
                 }
             }
+
             return View(userRegisterViewModel);
         }
     }

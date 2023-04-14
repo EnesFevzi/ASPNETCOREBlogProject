@@ -2,20 +2,9 @@
     <div class="sidebar-collapse">
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
-                <div class="dropdown profile-element">
-                    <img alt="image" class="rounded-circle" src="~/inspinia-gh-pages/img/profile_small.jpg" />
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <span class="block m-t-xs font-bold">@ViewBag.CurrentUser</span>
-                        <span class="text-muted text-xs block">Yazılım Mühendisi<b class="caret"></b></span>
-                    </a>
-                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a class="dropdown-item" href="profile.html">Profile</a></li>
-                        <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
-                        <li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>
-                        <li class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="login.html">Logout</a></li>
-                    </ul>
-                </div>
+                        
+                    @await Component.InvokeAsync("AdminWriterNavbarProfile")
+                    
                 <div class="logo-element">
                     IN+
                 </div>
@@ -37,22 +26,22 @@
                 </ul>
             </li>
             <li>
-                <a href="metrics.html"><i class="fa fa-pie-chart"></i> <span class="nav-label">Metrikler</span>  </a>
+                @*<a href="metrics.html"><i class="fa fa-pie-chart"></i> <span class="nav-label">Metrikler</span>  </a>*@
                 <a href="/Admin/Category/Index"><i class="fa fa-group"></i> <span class="nav-label">Kategoriler</span>  </a>
                 <a href="/Admin/AdminBlog/Index"><i class="fa fa-list"></i> <span class="nav-label">Bloglar</span>  </a>
-                <a href="metrics.html"><i class="fa fa-comment"></i> <span class="nav-label">Yorumlar</span>  </a>
+                <a href="/Admin/AdminComment/Index"><i class="fa fa-comment"></i> <span class="nav-label">Yorumlar</span>  </a>
                 <a href="/Admin/Writer/Index/"><i class="fa fa-user"></i> <span class="nav-label">Yazarlar</span>  </a>
-                <a href="metrics.html"><i class="fa fa-info"></i> <span class="nav-label">Ayarlar</span>  </a>
+                <a href="/Dashboard/Index/"><i class="fa fa-user"></i> <span class="nav-label">Yazar Paneline Git</span>  </a>
+                <a href="/Admin/AdminWriter/AdminWriterEditProfile/"><i class="fa fa-info"></i> <span class="nav-label">Ayarlar</span>  </a>
                 <a href="/Admin/AdminRole/Index"><i class="fa fa-lock"></i> <span class="nav-label">Roller</span>  </a>
-                <a href="/Admin/AdminComment/Index"><i class="fa fa-diamond"></i> <span class="nav-label">Yorumlar</span>  </a>
                 <a href="metrics.html"><i class="fa fa-phone"></i> <span class="nav-label">İletişim</span>  </a>
                 <a href="metrics.html"><i class="fa fa-book"></i> <span class="nav-label">Hakkımızda</span>  </a>
             </li>
             <li>
-                <a href="/Admin/Blog/ExportDynamicExportExcelBlogList/"><i class="fa fa-flask"></i> <span class="nav-label">Dinamik Rapor</span></a>
+               @* <a href="/Admin/Blog/ExportDynamicExportExcelBlogList/"><i class="fa fa-flask"></i> <span class="nav-label">Dinamik Rapor</span></a>*@
             </li>
             <li>
-                <a href="/Admin/Blog/Index/"><i class="fa fa-close"></i> <span class="nav-label">Çıkış Yap</span></a>
+                <a href="/Login/Logout"><i class="fa fa-close"></i> <span class="nav-label">Çıkış Yap</span></a>
             </li>
 
         </ul>

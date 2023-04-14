@@ -23,5 +23,6 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
             var values = _blogService.GetBlogsListWithCategory();
             return View(values);
         }
+
     }
 }

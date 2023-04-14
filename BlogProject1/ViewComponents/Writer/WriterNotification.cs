@@ -7,12 +7,7 @@ namespace ASPNETCOREBlogProject.ViewComponents.Writer
 {
     public class WriterNotification : ViewComponent
     {
-        protected readonly NotificationManager _notificationManager;
-
-        public WriterNotification(NotificationManager notificationManager)
-        {
-            _notificationManager = notificationManager;
-        }
+        NotificationManager _notificationManager = new NotificationManager(new EfNotificationRepository(new TContext()));
 
         public IViewComponentResult Invoke()
         {

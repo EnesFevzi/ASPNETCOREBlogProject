@@ -14,18 +14,25 @@ namespace ASPNETCOREBlogProject.Controllers
     [AllowAnonymous]
     public class BlogController : Controller
     {
-        BlogManager _blogManager = new BlogManager(new EfBlogRepository(new TContext()));
-        CategoryManager _categoryManager = new CategoryManager(new EfCategoryRepository(new TContext()));
-        CommentManager _commentManager = new CommentManager(new EfCommentRepository(new TContext()));
+        //BlogManager _blogManager = new BlogManager(new EfBlogRepository(new TContext()));
+        //CategoryManager _categoryManager = new CategoryManager(new EfCategoryRepository(new TContext()));
+        //CommentManager _commentManager = new CommentManager(new EfCommentRepository(new TContext()));
+        protected readonly IBlogService _blogService;
+        protected readonly ICategoryService _categoryService;
+        protected readonly ICommentService _commentService;
         protected readonly TContext _context;
-        public BlogController(TContext context)
+
+        public BlogController(IBlogService blogService, ICategoryService categoryService, ICommentService commentService, TContext context)
         {
+            _blogService = blogService;
+            _categoryService = categoryService;
+            _commentService = commentService;
             _context = context;
         }
 
         public IActionResult Index()
         {
-            var values = _blogManager.GetBlogsListWithCategory();
+            var values = _blogService.GetBlogsListWithCategory();
             return View(values);
         }
         [AllowAnonymous]
@@ -35,7 +42,7 @@ namespace ASPNETCOREBlogProject.Controllers
             var username = User.Identity.Name;
             var usermail = _context.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
             var writerID = _context.WriterUsers.Where(x => x.Email == usermail).Select(y => y.Id).FirstOrDefault();
-            var values = _blogManager.GetBlogByID(id);
+            var values = _blogService.GetBlogByID(id);
             return View(values);
         }
 
@@ -45,13 +52,13 @@ namespace ASPNETCOREBlogProject.Controllers
             var username = User.Identity.Name;
             var usermail = _context.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
             var writerID = _context.WriterUsers.Where(x => x.Email == usermail).Select(y => y.Id).FirstOrDefault();
-            var values = _blogManager.GetBlogsListWithWriter(writerID);
+            var values = _blogService.GetBlogsListWithWriter(writerID);
             return View(values);
         }
         [HttpGet]
         public IActionResult BlogAdd()
         {
-            List<SelectListItem> categoryvalues = (from x in _categoryManager.TGetList()
+            List<SelectListItem> categoryvalues = (from x in _categoryService.TGetList()
                                                    select new SelectListItem
                                                    {
                                                        Text = x.CategoryName,
@@ -77,7 +84,7 @@ namespace ASPNETCOREBlogProject.Controllers
                 b.BlogStatus = true;
                 b.BlogCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
                 b.WriterID = writerID;
-                _blogManager.TAdd(b);
+                _blogService.TAdd(b);
                 return RedirectToAction("BlogListByWriter", "Blog");
                 // Blog kaydetme işlemini gerçekleştirin  
             }
@@ -95,15 +102,15 @@ namespace ASPNETCOREBlogProject.Controllers
 
         public IActionResult DeleteBlog(int id)
         {
-            var values = _blogManager.TGetByID(id);
-            _blogManager.TDelete(values);
+            var values = _blogService.TGetByID(id);
+            _blogService.TDelete(values);
             return RedirectToAction("BlogListByWriter", "Blog");
         }
         [HttpGet]
         public IActionResult EditBlog(int id)
         {
-            var values = _blogManager.TGetByID(id);
-            List<SelectListItem> categoryvalues = (from x in _categoryManager.TGetList()
+            var values = _blogService.TGetByID(id);
+            List<SelectListItem> categoryvalues = (from x in _categoryService.TGetList()
                                                    select new SelectListItem
                                                    {
                                                        Text = x.CategoryName,
@@ -123,7 +130,7 @@ namespace ASPNETCOREBlogProject.Controllers
             b.BlogStatus = true;
             b.BlogCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
             b.WriterID = writerID;
-            _blogManager.TUpdate(b);
+            _blogService.TUpdate(b);
             return RedirectToAction("BlogListByWriter", "Blog");
         }
     }

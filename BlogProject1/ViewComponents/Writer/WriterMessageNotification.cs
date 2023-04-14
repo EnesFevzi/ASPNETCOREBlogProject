@@ -2,27 +2,30 @@
 using BlogProject1.DataAccessLayer.Concrete.EntityFramework;
 using BlogProject1.DataAccessLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using BlogProject1.BusinessLayer.Abstract;
+using Microsoft.AspNetCore.Identity;
+using BlogProject1.EntityLayer.Concrete;
 
 namespace ASPNETCOREBlogProject.ViewComponents.Writer
 {
     public class WriterMessageNotification:ViewComponent
     {
-        protected readonly WriterMessageManager _message2Manager;
+        protected readonly IWriterMessageService _message2Manager;
+        private readonly UserManager<WriterUser> _userManager;
         protected readonly TContext _context;
 
-        public WriterMessageNotification(WriterMessageManager message2Manager, TContext context)
+        public WriterMessageNotification(IWriterMessageService message2Manager, UserManager<WriterUser> userManager, TContext context)
         {
             _message2Manager = message2Manager;
+            _userManager = userManager;
             _context = context;
         }
 
         public IViewComponentResult Invoke()
         {
-            var username = User.Identity.Name;
-            var usermail = _context.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
-            var writerID = _context.WriterUsers.Where(x => x.Email == usermail).Select(y => y.Id).FirstOrDefault();
-            var values = _message2Manager.GetInboxListByWriter(writerID);
+            var values = _message2Manager.TGetList();
             return View(values);
+
         }
     }
 }

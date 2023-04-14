@@ -12,7 +12,8 @@ using X.PagedList;
 namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [AllowAnonymous]
+    [Route("Admin/[controller]/[action]")]
+    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -21,20 +22,17 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
         {
             _categoryService = categoryService;
         }
-
         public IActionResult Index(int page = 1)
         {
             var values = _categoryService.TGetList().ToPagedList(page, 10);
 
             return View(values);
         }
-
         [HttpGet]
         public IActionResult AddCategory()
         {
             return View();
         }
-
         [HttpPost]
         public IActionResult AddCategory(Category category)
         {
@@ -56,7 +54,6 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
             }
             return View();
         }
-
         public IActionResult CategoryDelete(int id)
         {
             var value = _categoryService.TGetByID(id);
@@ -75,7 +72,7 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
 
             return View(category);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult EditCategory(Category category)
         {

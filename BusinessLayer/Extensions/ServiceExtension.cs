@@ -16,11 +16,16 @@ namespace BlogProject1.BusinessLayer.Extensions
         public static IServiceCollection LoadServiceLayerExtension(this IServiceCollection services)
         {
             services.AddScoped<IAboutService , AboutManager>();
+            services.AddScoped<IContactService , ContactManager>();
             services.AddScoped<IWriterTaskService , WriterTaskManager>();
             services.AddScoped<IBlogService , BlogManager>();
             services.AddScoped<ICommentService , CommentManager>();
             services.AddScoped<ICategoryService , CategoryManager>();
             services.AddScoped<IWriterMessageService, WriterMessageManager>();
+            services.AddScoped<IVideoService, VideoManager>();
+            services.AddScoped<INewService, NewManager>();
+            services.AddScoped<IMessageService, MessageManager>();
+            services.AddScoped<INotificationService, NotificationManager>();
 
             //services.AddScoped<IAboutRepository, EfAboutRepository>();
 

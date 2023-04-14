@@ -18,11 +18,16 @@ namespace BlogProject1.DataAccessLayer.Extensions
             //services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IAboutRepository, EfAboutRepository>();
+            services.AddScoped<IContactRepository, EfContactRepository>();
             services.AddScoped<IWriterTaskRepository, EfWriterTaskRepository>();
             services.AddScoped<IBlogRepository, EfBlogRepository>();
             services.AddScoped<ICommentRepository, EfCommentRepository>();
             services.AddScoped<IWriterMessageRepository, EfWriterMessageRepository>();
             services.AddScoped<ICategoryRepository, EfCategoryRepository>();
+            services.AddScoped<IVideoRepository, EfVideoRepository>();
+            services.AddScoped<INewRepository, EfNewRepository>();
+            services.AddScoped<IMessageRepository, EfMessageRepository>();
+            services.AddScoped<INotificationRepository, EfNotificationRepository>();
             
 
             //services.AddScoped<ICategoryRepository, EfCategoryRepository>();

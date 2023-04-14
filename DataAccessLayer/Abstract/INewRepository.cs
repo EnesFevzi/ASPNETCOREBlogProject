@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace BlogProject1.DataAccessLayer.Abstract
 {
-    public interface INewsRepository:IGenericRepository<News>
+    public interface INewRepository:IGenericRepository<New>
     {
+        List<New> GetNewsListWithCategory();
+        List<New> GetListWithCategoryByWriter(int id);
     }
 }

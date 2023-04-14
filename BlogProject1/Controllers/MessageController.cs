@@ -30,6 +30,7 @@ namespace ASPNETCOREBlogProject.Controllers
             return View(messageList);
 
 
+
             //var username = User.Identity.Name;
             //var usermail = _context.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
             //var writerID = _context.WriterUsers.Where(x => x.Email == usermail).Select(y => y.Id).FirstOrDefault();

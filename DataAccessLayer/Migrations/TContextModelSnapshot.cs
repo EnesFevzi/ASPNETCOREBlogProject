@@ -298,6 +298,55 @@ namespace BlogProject1.DataAccessLayer.Migrations
                     b.ToTable("Messages");
                 });
 
+            modelBuilder.Entity("BlogProject1.EntityLayer.Concrete.New", b =>
+                {
+                    b.Property<int>("NewID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NewID"));
+
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NewContent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NewImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("NewStatus")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NewThumbnailImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NewTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("NewsCreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("WriterID")
+                        .HasColumnType("int");
+
+                    b.HasKey("NewID");
+
+                    b.HasIndex("CategoryID");
+
+                    b.HasIndex("WriterID");
+
+                    b.ToTable("News");
+                });
+
             modelBuilder.Entity("BlogProject1.EntityLayer.Concrete.NewsLetter", b =>
                 {
                     b.Property<int>("MailID")
@@ -379,6 +428,47 @@ namespace BlogProject1.DataAccessLayer.Migrations
                     b.HasKey("SocialMediaID");
 
                     b.ToTable("SocialMedias");
+                });
+
+            modelBuilder.Entity("BlogProject1.EntityLayer.Concrete.Video", b =>
+                {
+                    b.Property<int>("VideoID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VideoID"));
+
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("VideoContent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("VideoCreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("VideoStatus")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("VideoTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VideoURL")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("WriterID")
+                        .HasColumnType("int");
+
+                    b.HasKey("VideoID");
+
+                    b.HasIndex("CategoryID");
+
+                    b.HasIndex("WriterID");
+
+                    b.ToTable("Videos");
                 });
 
             modelBuilder.Entity("BlogProject1.EntityLayer.Concrete.WriterMessage", b =>
@@ -512,7 +602,6 @@ namespace BlogProject1.DataAccessLayer.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -701,6 +790,44 @@ namespace BlogProject1.DataAccessLayer.Migrations
                     b.Navigation("Blog");
                 });
 
+            modelBuilder.Entity("BlogProject1.EntityLayer.Concrete.New", b =>
+                {
+                    b.HasOne("BlogProject1.EntityLayer.Concrete.Category", "Category")
+                        .WithMany("New")
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BlogProject1.EntityLayer.Concrete.WriterUser", "Writer")
+                        .WithMany("News")
+                        .HasForeignKey("WriterID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Writer");
+                });
+
+            modelBuilder.Entity("BlogProject1.EntityLayer.Concrete.Video", b =>
+                {
+                    b.HasOne("BlogProject1.EntityLayer.Concrete.Category", "Category")
+                        .WithMany("Video")
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BlogProject1.EntityLayer.Concrete.WriterUser", "Writer")
+                        .WithMany("Videos")
+                        .HasForeignKey("WriterID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Writer");
+                });
+
             modelBuilder.Entity("BlogProject1.EntityLayer.Concrete.WriterTask", b =>
                 {
                     b.HasOne("BlogProject1.EntityLayer.Concrete.WriterUser", "Writer")
@@ -771,13 +898,21 @@ namespace BlogProject1.DataAccessLayer.Migrations
             modelBuilder.Entity("BlogProject1.EntityLayer.Concrete.Category", b =>
                 {
                     b.Navigation("Blog");
+
+                    b.Navigation("New");
+
+                    b.Navigation("Video");
                 });
 
             modelBuilder.Entity("BlogProject1.EntityLayer.Concrete.WriterUser", b =>
                 {
                     b.Navigation("Blogs");
 
+                    b.Navigation("News");
+
                     b.Navigation("Tasks");
+
+                    b.Navigation("Videos");
                 });
 #pragma warning restore 612, 618
         }
