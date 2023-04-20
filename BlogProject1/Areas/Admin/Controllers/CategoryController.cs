@@ -13,7 +13,7 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
-    [Route("Admin/[controller]")]
+    //[Route("Admin/[controller]")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -22,7 +22,7 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
         {
             _categoryService = categoryService;
         }
-        [Route("Index")]
+        //[Route("Admin/Category/Index")]
         public IActionResult Index(int page = 1)
         {
             var values = _categoryService.TGetList().ToPagedList(page, 10);
@@ -30,15 +30,13 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
             return View(values);
         }
         [HttpGet]
-        [Route("")]
-        [Route("AddCategory")]
+        //[Route("AddCategory")]
         public IActionResult AddCategory()
         {
             return View();
         }
         [HttpPost]
-        [Route("")]
-        [Route("AddCategory")]
+        //[Route("AddCategory")]
         public IActionResult AddCategory(Category category)
         {
 
@@ -48,7 +46,7 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
             {
                 category.CategoryStatus = true;
                 _categoryService.TAdd(category);
-                return RedirectToAction("Index","Category");
+                return RedirectToAction("Index","Category", new { area = "Admin" });
             }
             else
             {
@@ -59,17 +57,15 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
             }
             return View();
         }
-        [Route("")]
-        [Route("CategoryDelete/{id}")]
+        //[Route("CategoryDelete/{id}")]
         public IActionResult CategoryDelete(int id)
         {
             var value = _categoryService.TGetByID(id);
             _categoryService.TDelete(value);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Category", new { area = "Admin" });
         }
         [HttpGet]
-        [Route("")]
-        [Route("EditCategory/{id}")]
+        //[Route("EditCategory/{id}")]
         public IActionResult EditCategory(int id)
         {
             var category = _categoryService.TGetByID(id);
@@ -82,28 +78,26 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
             return View(category);
         }
         [HttpPost]
-        [Route("")]
-        [Route("EditCategory/{id}")]
+        //[Route("EditCategory/{id}")]
         public IActionResult EditCategory(Category category)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(category);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(category);
+            //}
 
-            var existingCategory = _categoryService.TGetByID(category.CategoryID);
+            //var existingCategory = _categoryService.TGetByID(category.CategoryID);
 
-            if (existingCategory == null)
-            {
-                return NotFound();
-            }
+            //if (existingCategory == null)
+            //{
+            //    return NotFound();
+            //}
 
-            existingCategory.CategoryName = category.CategoryName;
-            existingCategory.CategoryDescription = category.CategoryDescription;
+            //existingCategory.CategoryName = category.CategoryName;
+            //existingCategory.CategoryDescription = category.CategoryDescription;
 
-            _categoryService.TUpdate(existingCategory);
-
-            return RedirectToAction("Index", "Category");
+            _categoryService.TUpdate(category);
+            return RedirectToAction("Index");
         }
 
 

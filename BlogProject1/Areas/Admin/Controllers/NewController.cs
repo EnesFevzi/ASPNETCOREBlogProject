@@ -32,6 +32,7 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
             _writerTaskService = writerTaskService;
             _context = context;
         }
+        [Route("Index")]
         public IActionResult Index()
         {
 

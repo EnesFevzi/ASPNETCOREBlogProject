@@ -27,24 +27,6 @@ namespace BlogProject1.BusinessLayer.Extensions
             services.AddScoped<IMessageService, MessageManager>();
             services.AddScoped<INotificationService, NotificationManager>();
 
-            //services.AddScoped<IAboutRepository, EfAboutRepository>();
-
-            //services.AddScoped<ICategoryRepository, EfCategoryRepository>();
-
-            //services.AddScoped<IBlogRepository, EfBlogRepository>();
-
-            //services.AddScoped<ICommentRepository, EfCommentRepository>();
-
-            //services.AddScoped<IContactRepository, EfContactRepository>();
-
-            //services.AddScoped<IMessageRepository, EfMessageRepository>();
-
-            //services.AddScoped<INewsLetterRepository, EfNewsLetterRepository>();
-
-            //services.AddScoped<INotificationRepository, EfNotificationRepository>();
-
-            //services.AddScoped<IWriterMessageRepository, EfWriterMessageRepository>();
-
             return services;
 
 

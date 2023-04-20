@@ -46,6 +46,7 @@ namespace ASPNETCOREBlogProject.Controllers
             return View(values);
         }
 
+        [Authorize(Roles = "Writer")]
 
         public IActionResult BlogListByWriter()
         {

@@ -20,7 +20,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddDbContext<TContext>();
-builder.Services.AddIdentity<WriterUser, WriterRole>().AddEntityFrameworkStores<TContext>().AddDefaultTokenProviders(); 
+builder.Services.AddIdentity<WriterUser, WriterRole>().AddEntityFrameworkStores<TContext>().AddDefaultTokenProviders();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<UserManager<WriterUser>>();
 builder.Services.AddScoped<RoleManager<WriterRole>>();
@@ -45,13 +45,14 @@ builder.Services.AddMvc(config =>
     config.Filters.Add(new AuthorizeFilter(policy));
 
 });
-builder.Services.AddAuthentication(
-                CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(x =>
-                {
-                    x.LoginPath = "/Login/Index";
-                }
-            );
+
+//builder.Services.AddAuthentication(
+//                CookieAuthenticationDefaults.AuthenticationScheme)
+//                .AddCookie(x =>
+//                {
+//                    x.LoginPath = "/Login/Index";
+//                }
+//            );
 
 
 
@@ -101,21 +102,23 @@ app.UseAuthorization();
 //app.MapControllerRoute(
 //    name: "default",
 //    pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
-
+     name: "areas",
+     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+   );
     endpoints.MapControllerRoute(
-      name: "areas",
-      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-    );
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}"
+        );
+
 });
 
 //app.UseEndpoints(endpoints =>
 //{
-    
+
 //});
 
 app.Run();

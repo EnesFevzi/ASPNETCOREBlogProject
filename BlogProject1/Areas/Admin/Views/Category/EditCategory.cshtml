@@ -15,14 +15,14 @@
                 <form class="forms-sample">
                     <div class="form-group">
                         <label>ID</label>
-                        @Html.TextBoxFor(x => x.CategoryID, new { @class = "form-control" })
+                        @Html.TextBoxFor(x => x.CategoryID, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                     <div class="form-group">
                         <label>Kategori Başlığı</label>
                         @Html.TextBoxFor(x => x.CategoryName, new { @class = "form-control" })
                     </div>
                     <div class="form-group">
-                        <label>Tarih</label>
+                        <label>Açıklama</label>
                         @Html.TextBoxFor(x => x.CategoryDescription, new { @class = "form-control" })
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Kaydet</button>
@@ -30,6 +30,6 @@
                 </form>
             </div>
         </div>
-    </div>
+   </div>
 }
 
