@@ -55,6 +55,11 @@ namespace BlogProject1.BusinessLayer.Concrete
             throw new NotImplementedException();
         }
 
+        public Task<Video> TGetByFilterAsync(Expression<Func<Video, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public Video TGetByID(int id)
         {
             throw new NotImplementedException();
@@ -66,6 +71,11 @@ namespace BlogProject1.BusinessLayer.Concrete
         }
 
         public List<Video> TGetListAll(Expression<Func<Video, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Video>> TGetListAsync()
         {
             throw new NotImplementedException();
         }

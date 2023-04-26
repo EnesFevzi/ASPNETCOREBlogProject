@@ -2,6 +2,8 @@
 using BlogProject1.BusinessLayer.Concrete;
 using BlogProject1.DataAccessLayer.Abstract;
 using BlogProject1.DataAccessLayer.Repository;
+using BlogProject1.EntityLayer.Concrete;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -26,6 +28,7 @@ namespace BlogProject1.BusinessLayer.Extensions
             services.AddScoped<INewService, NewManager>();
             services.AddScoped<IMessageService, MessageManager>();
             services.AddScoped<INotificationService, NotificationManager>();
+            services.AddScoped<RoleManager<WriterRole>>();
 
             return services;
 

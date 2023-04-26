@@ -8,22 +8,22 @@
 
 @using (Html.BeginForm("EditNew", "New", FormMethod.Post))
 {
-    @Html.Label("Blog ID")
-    @Html.TextBoxFor(x=>x.NewID, new {@class = "form-control"})
+    @Html.Label("Haber ID")
+    @Html.HiddenFor(x=>x.NewID, new {@class = "form-control"})
     <br />
-    @Html.Label("Blog Başlığı")
+    @Html.Label("Haber Başlığı")
     @Html.TextBoxFor(x=>x.NewTitle, new {@class = "form-control"})
     <br />
-    @Html.Label("Blog Thumbnail Url")
+    @Html.Label("Haber Thumbnail Url")
     @Html.TextBoxFor(x=>x.NewThumbnailImage, new {@class = "form-control"})
     <br />
-    @Html.Label("Blog Görseli")
+    @Html.Label("Haber Görseli")
     @Html.TextBoxFor(x=>x.NewImage, new {@class = "form-control"})
     <br />
-    @Html.Label("Blog Kategori")
+    @Html.Label("Haber Kategori")
     @Html.DropDownListFor(x=>x.CategoryID,(List<SelectListItem>)ViewBag.cv, new{@class = "form-control"})
     <br />
-    @Html.Label("Blog İçeriği")
+    @Html.Label("Haber İçeriği")
     @Html.TextAreaFor(x=>x.NewContent,10,3, new {@class = "form-control"})
     <br />
     <button class="btn btn-success">Güncelle</button>

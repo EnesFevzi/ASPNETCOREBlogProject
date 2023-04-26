@@ -13,8 +13,6 @@ namespace BlogProject1.DataAccessLayer.Repository
 	public class GenericRepository<T> : IGenericRepository<T> where T : class
 	{
 		protected readonly TContext _context;
-
-
 		public GenericRepository(TContext context)
 		{
 			_context = context;
@@ -65,9 +63,11 @@ namespace BlogProject1.DataAccessLayer.Repository
             return _context.Set<T>().ToList();
         }
 
-        public async Task<List<T>> GetListAllAsync(Expression<Func<T, bool>> filter)
+        public async Task<List<T>> GetListAllAsync(Expression<Func<T, bool>> filter = null)
         {
-             return await _context.Set<T>().Where(filter).ToListAsync();
+            return filter == null ?
+                await _context.Set<T>().ToListAsync() :
+                await _context.Set<T>().Where(filter).ToListAsync();
         }
 
         public void Update(T t)
@@ -75,5 +75,18 @@ namespace BlogProject1.DataAccessLayer.Repository
             _context.Update(t);
             _context.SaveChanges();
         }
+
+        public async Task<List<T>> GetListAsync()
+        {
+            return await _context.Set<T>().ToListAsync();
+        }
+
+        public async Task<List<T>> GetByFilterAsync(Expression<Func<T, bool>> filter = null)
+        {
+            return filter == null ?
+                await _context.Set<T>().ToListAsync():
+                await _context.Set<T>().Where(filter).ToListAsync();
+        }
+
     }
 }

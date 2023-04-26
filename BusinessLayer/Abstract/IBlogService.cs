@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +14,10 @@ namespace BlogProject1.BusinessLayer.Abstract
         List<Blog> GetBlogByID(int id);
         List<Blog> GetBlogsListWithWriter(int id);
         List<Blog> GetBlogsListWithComments(int id);
+        List<Blog> GetBlogListByWriter(int id);
+        Task<List<Blog>> GetBlogListByWriterAsync(int id);
+
+        Task ChangedBlogStatusAsync(int id);
 
     }
 }

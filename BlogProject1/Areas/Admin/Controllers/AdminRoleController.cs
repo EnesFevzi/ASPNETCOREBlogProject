@@ -113,42 +113,67 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
             return View(values);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> AssignRole(int id)
+        //[HttpGet]
+        //public async Task<IActionResult> AssignRole(int id)
+        //{
+        //    var user = _userManager.Users.FirstOrDefault(x => x.Id == id);
+        //    var roles = _roleManager.Roles.ToList();
+        //    TempData["UserId"] = user.Id;
+        //    var userRoles = await _userManager.GetRolesAsync(user);
+        //    List<RoleAssignViewModel> model = new List<RoleAssignViewModel>();
+        //    foreach (var role in roles)
+        //    {
+        //        RoleAssignViewModel roleAssignViewModel = new RoleAssignViewModel();
+        //        roleAssignViewModel.RoleId = role.Id;
+        //        roleAssignViewModel.Name = role.Name;
+        //        roleAssignViewModel.Exists = userRoles.Contains(role.Name);
+        //        model.Add(roleAssignViewModel);
+        //    }
+        //    return View(model);
+        //}
+        //[HttpPost]
+        //public async Task<IActionResult> AssignRole(List<RoleAssignViewModel> model)
+        //{
+        //    var userId = (int)TempData["UserId"];
+        //    var user = _userManager.Users.FirstOrDefault(x => x.Id == userId);
+        //    foreach (var item in model)
+        //    {
+        //        if (item.Exists)
+        //        {
+        //            await _userManager.AddToRoleAsync(user, item.Name);
+        //        }
+        //        else
+        //        {
+        //            await _userManager.RemoveFromRoleAsync(user, item.Name);
+        //        }
+        //    }
+        //    return RedirectToAction("UserRoleList");
+        //}
+        public async Task<IActionResult> AssignRole(string id)
         {
-            var user = _userManager.Users.FirstOrDefault(x => x.Id == id);
-            var roles = _roleManager.Roles.ToList();
-            TempData["UserId"] = user.Id;
-            var userRoles = await _userManager.GetRolesAsync(user);
-
-            List<RoleAssignViewModel> model = new List<RoleAssignViewModel>();
-            foreach (var item in roles)
+            WriterUser user = await _userManager.FindByIdAsync(id);
+            List<WriterRole> allRoles = _roleManager.Roles.ToList();
+            List<string> userRoles = await _userManager.GetRolesAsync(user) as List<string>;
+            List<RoleAssignViewModel> assignRoles = new List<RoleAssignViewModel>();
+            allRoles.ForEach(role => assignRoles.Add(new RoleAssignViewModel
             {
-                RoleAssignViewModel m = new RoleAssignViewModel();
-                m.RoleId = item.Id;
-                m.Name = item.Name;
-                m.Exists = userRoles.Contains(item.Name);
-                model.Add(m);
+                Exists = userRoles.Contains(role.Name),
+                RoleId = role.Id,
+                Name = role.Name
+            }));
 
-            }
-
-            return View(model);
+            return View(assignRoles);
         }
         [HttpPost]
-        public async Task<IActionResult> AssignRole(List<RoleAssignViewModel> model)
+        public async Task<ActionResult> AssignRole(List<RoleAssignViewModel> modelList, string id)
         {
-            var userid = (int)TempData["UserId"];
-            var user = _userManager.Users.FirstOrDefault(x => x.Id == userid);
-            foreach (var item in model)
+            WriterUser user = await _userManager.FindByIdAsync(id);
+            foreach (RoleAssignViewModel role in modelList)
             {
-                if (item.Exists)
-                {
-                    await _userManager.AddToRoleAsync(user, item.Name);
-                }
+                if (role.Exists)
+                    await _userManager.AddToRoleAsync(user, role.Name);
                 else
-                {
-                    await _userManager.RemoveFromRoleAsync(user, item.Name);
-                }
+                    await _userManager.RemoveFromRoleAsync(user, role.Name);
             }
             return RedirectToAction("UserRoleList");
         }

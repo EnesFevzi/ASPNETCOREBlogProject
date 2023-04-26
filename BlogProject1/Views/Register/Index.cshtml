@@ -114,9 +114,8 @@
                                 </div>
                                 <div class="text-danger" asp-validation-summary="ModelOnly">
                                 </div>
-                                <div class="mt-3">
-                                    <button class="btn btn-primary">Kayıt Ol</button>
-                                    @*<a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" asp-action="Index" >Kayıt Ol</a>*@
+                                <div class="form-group text-center">
+                                    <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium">Giriş Yap</button>
                                 </div>
                                 @*<div class="text-center mt-4 font-weight-light">
                                 Already have an account? <a href="login.html" class="text-primary">Login</a>
@@ -148,3 +147,14 @@
 </html>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.12.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#openLoginModal').on('click', function () {
+            $('#loginModal').modal('show'); // Login modalını aç
+        });
+    });
+</script>

@@ -12,8 +12,6 @@ namespace ASPNETCOREBlogProject.Controllers
     [Authorize(Roles = "Writer")]
     public class DashboardController : Controller
     {
-        BlogManager blogManager = new BlogManager(new EfBlogRepository(new TContext()));
-
         private readonly UserManager<WriterUser> _userManager;
         private readonly SignInManager<WriterUser> _signInManager;
         private readonly IBlogService _blogService;

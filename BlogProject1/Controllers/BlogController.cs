@@ -8,15 +8,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
+using System.Reflection.Metadata;
+using X.PagedList;
 
 namespace ASPNETCOREBlogProject.Controllers
 {
     [AllowAnonymous]
     public class BlogController : Controller
     {
-        //BlogManager _blogManager = new BlogManager(new EfBlogRepository(new TContext()));
-        //CategoryManager _categoryManager = new CategoryManager(new EfCategoryRepository(new TContext()));
-        //CommentManager _commentManager = new CommentManager(new EfCommentRepository(new TContext()));
         protected readonly IBlogService _blogService;
         protected readonly ICategoryService _categoryService;
         protected readonly ICommentService _commentService;
@@ -32,6 +31,7 @@ namespace ASPNETCOREBlogProject.Controllers
 
         public IActionResult Index()
         {
+           
             var values = _blogService.GetBlogsListWithCategory();
             return View(values);
         }
@@ -48,13 +48,34 @@ namespace ASPNETCOREBlogProject.Controllers
 
         [Authorize(Roles = "Writer")]
 
-        public IActionResult BlogListByWriter()
+        public async Task<IActionResult> BlogListByWriter(int page = 1)
         {
             var username = User.Identity.Name;
             var usermail = _context.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
             var writerID = _context.WriterUsers.Where(x => x.Email == usermail).Select(y => y.Id).FirstOrDefault();
             var values = _blogService.GetBlogsListWithWriter(writerID);
-            return View(values);
+            var pagedValues = await values.ToPagedListAsync(page, 5); // await ekleyin
+            return View(pagedValues);
+        }
+        public async Task<IActionResult> ChangeStatusBlog(int id)
+        {
+            var username = User.Identity.Name;
+            var usermail = _context.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
+            var writerID = _context.WriterUsers.Where(x => x.Email == usermail).Select(y => y.Id).FirstOrDefault();
+            var values = _blogService.TGetByID(id);
+            //_blogService.TUpdate(values);
+            if (writerID == values.WriterID)
+            {
+                var value = _blogService.TGetByID(id);
+                if (value.BlogStatus)
+                    value.BlogStatus = false;
+                else
+                    value.BlogStatus = true;
+
+                _blogService.TUpdate(value);
+                
+            }
+            return RedirectToAction("BlogListByWriter", "Blog");
         }
         [HttpGet]
         public IActionResult BlogAdd()

@@ -73,5 +73,15 @@ namespace BlogProject1.BusinessLayer.Concrete
         {
             throw new NotImplementedException();
         }
+
+        public Task<List<Message>> TGetListAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Message> TGetByFilterAsync(Expression<Func<Message, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

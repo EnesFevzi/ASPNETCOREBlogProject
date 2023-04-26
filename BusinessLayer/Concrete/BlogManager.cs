@@ -80,5 +80,30 @@ namespace BlogProject1.BusinessLayer.Concrete
             return _blogRepository.GetBlogsListWithComments(id);
         }
 
+        public async Task<List<Blog>> TGetListAsync()
+        {
+            return await _blogRepository.GetListAsync();
+        }
+
+
+        public Task<Blog> TGetByFilterAsync(Expression<Func<Blog, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<Blog>> GetBlogListByWriterAsync(int id)
+        {
+            return await _blogRepository.GetByFilterAsync(x => x.WriterID == id);
+        }
+
+        public List<Blog> GetBlogListByWriter(int id)
+        {
+            return _blogRepository.GetByFilter(x => x.WriterID == id);
+        }
+
+        public async Task ChangedBlogStatusAsync(int id)
+        {
+            await _blogRepository.GetByFilterAsync(x => x.BlogID == id);
+        }
     }
 }

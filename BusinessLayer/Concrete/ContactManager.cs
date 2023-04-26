@@ -39,6 +39,11 @@ namespace BlogProject1.BusinessLayer.Concrete
             throw new NotImplementedException();
         }
 
+        public Task<Contact> TGetByFilterAsync(Expression<Func<Contact, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public Contact TGetByID(int id)
         {
             throw new NotImplementedException();
@@ -50,6 +55,11 @@ namespace BlogProject1.BusinessLayer.Concrete
         }
 
         public List<Contact> TGetListAll(Expression<Func<Contact, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Contact>> TGetListAsync()
         {
             throw new NotImplementedException();
         }

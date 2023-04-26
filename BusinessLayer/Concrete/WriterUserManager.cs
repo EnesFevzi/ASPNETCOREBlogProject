@@ -79,5 +79,15 @@ namespace BlogProject1.BusinessLayer.Concrete
             else
                 return await _userManager.Users.CountAsync(filter);
         }
+
+        public Task<List<WriterUser>> TGetListAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<WriterUser> TGetByFilterAsync(Expression<Func<WriterUser, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

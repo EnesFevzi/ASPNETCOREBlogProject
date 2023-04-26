@@ -68,6 +68,14 @@ namespace BlogProject1.BusinessLayer.Concrete
             return _categoryRepository.GetListAll();
         }
 
-        
+        public Task<List<Category>> TGetListAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Category> TGetByFilterAsync(Expression<Func<Category, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

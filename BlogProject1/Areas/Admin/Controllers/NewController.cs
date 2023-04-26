@@ -11,7 +11,7 @@ using System.Data;
 namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Route("Admin/[controller]")]
+    //[Route("Admin/[controller]")]
     [Authorize(Roles = "Admin")]
     public class NewController : Controller
     {
@@ -32,14 +32,14 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
             _writerTaskService = writerTaskService;
             _context = context;
         }
-        [Route("Index")]
+        //[Route("Index")]
         public IActionResult Index()
         {
 
             var values = _newService.GetNewListWithCategory();
             return View(values);
         }
-        [Route("NewsListByWriter")]
+        //[Route("NewsListByWriter")]
         public IActionResult NewsListByWriter()
         {
             var username = User.Identity.Name;
@@ -51,8 +51,8 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
 
 
         [HttpGet]
-        [Route("")]
-        [Route("AddNew")]
+        //[Route("")]
+        //[Route("AddNew")]
         public IActionResult AddNew()
         {
             List<SelectListItem> categoryvalues = (from x in _categoryService.TGetList()
@@ -70,8 +70,8 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
 
 
         [HttpPost]
-        [Route("")]
-        [Route("AddNew")]
+        //[Route("")]
+        //[Route("AddNew")]
         public IActionResult AddNew(New b)
         {
             var username = User.Identity.Name;
@@ -105,8 +105,8 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
 
 
 
-        [Route("")]
-        [Route("DeleteNew/{id}")]
+        //[Route("")]
+        //[Route("DeleteNew/{id}")]
         public IActionResult DeleteNew(int id)
         {
             var values = _newService.TGetByID(id);
@@ -118,8 +118,8 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
 
 
         [HttpGet]
-        [Route("")]
-        [Route("EditNew/{id}")]
+        //[Route("")]
+        //[Route("EditNew/{id}")]
         public IActionResult EditNew(int id)
         {
             var values = _newService.TGetByID(id);
@@ -137,8 +137,8 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
 
 
         [HttpPost]
-        [Route("")]
-        [Route("EditNew/{id}")]
+        //[Route("")]
+        //[Route("EditNew/{id}")]
         public IActionResult EditNew(New b)
         {
             var username = User.Identity.Name;

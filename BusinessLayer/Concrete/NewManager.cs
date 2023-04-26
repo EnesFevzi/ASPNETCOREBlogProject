@@ -74,5 +74,15 @@ namespace BlogProject1.BusinessLayer.Concrete
         {
             _newRepository.Update(entity);
         }
+
+        public Task<List<New>> TGetListAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<New> TGetByFilterAsync(Expression<Func<New, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

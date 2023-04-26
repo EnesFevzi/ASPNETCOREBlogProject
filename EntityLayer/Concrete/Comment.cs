@@ -17,17 +17,17 @@ namespace BlogProject1.EntityLayer.Concrete
 		public DateTime CommentDate { get; set; }
 		public bool CommentStatus { get; set; }
 
-        public int BlogScore { get; set; }
+        public int BlogScore2 { get; set; }
 
-        //Navigation Prop
+		//Navigation Prop
 
-        [ForeignKey("BlogID")]
+		[ForeignKey("BlogID")]
 		public int BlogID { get; set; }
-        public Blog Blog { get; set; }
+		public Blog Blog { get; set; }
 
 
 
 
 
-    }
+	}
 }

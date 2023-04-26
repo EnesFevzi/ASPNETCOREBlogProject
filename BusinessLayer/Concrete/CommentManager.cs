@@ -66,16 +66,28 @@ namespace BlogProject1.BusinessLayer.Concrete
         {
             throw new NotImplementedException();
         }
-        public async Task<List<Comment>> GetListByIdAsync(int id)
-        {
-            return await _commentRepository.GetListAllAsync(x => x.BlogID == id);
-        }
+        
         public List<Comment> GetCommentWithBlog()
         {
             return _commentRepository.GetListWithBlog();
         }
 
         Task<int> IGenericService<Comment>.GetCountAsync(Expression<Func<Comment, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Comment>> TGetListAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Comment>> GetListByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Comment> TGetByFilterAsync(Expression<Func<Comment, bool>> filter = null)
         {
             throw new NotImplementedException();
         }

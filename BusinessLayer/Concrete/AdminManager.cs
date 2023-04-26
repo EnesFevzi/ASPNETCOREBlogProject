@@ -39,6 +39,11 @@ namespace BlogProject1.BusinessLayer.Concrete
             throw new NotImplementedException();
         }
 
+        public Task<Admin> TGetByFilterAsync(Expression<Func<Admin, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public Admin TGetByID(int id)
         {
             throw new NotImplementedException();
@@ -55,6 +60,11 @@ namespace BlogProject1.BusinessLayer.Concrete
 		}
 
 		public List<Admin> TGetListAll(Expression<Func<Admin, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Admin>> TGetListAsync()
         {
             throw new NotImplementedException();
         }

@@ -17,7 +17,7 @@ namespace BlogProject1.DataAccessLayer.Abstract
         List<T> GetList();
         List<T> GetByFilter(Expression<Func<T, bool>> filter);
         Task<int> GetCountAsync(Expression<Func<T, bool>> filter = null);
-
-        Task<List<T>> GetListAllAsync(Expression<Func<T, bool>> filter);
+        Task<List<T>> GetListAsync();
+        Task<List<T>> GetByFilterAsync(Expression<Func<T, bool>> filter = null);
     }
 }

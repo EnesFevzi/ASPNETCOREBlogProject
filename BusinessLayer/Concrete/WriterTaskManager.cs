@@ -45,6 +45,11 @@ namespace BlogProject1.BusinessLayer.Concrete
             throw new NotImplementedException();
         }
 
+        public Task<WriterTask> TGetByFilterAsync(Expression<Func<WriterTask, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public WriterTask TGetByID(int id)
         {
            return  _writerTaskRepository.GetByID(id);
@@ -56,6 +61,11 @@ namespace BlogProject1.BusinessLayer.Concrete
         }
 
         public List<WriterTask> TGetListAll(Expression<Func<WriterTask, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<WriterTask>> TGetListAsync()
         {
             throw new NotImplementedException();
         }

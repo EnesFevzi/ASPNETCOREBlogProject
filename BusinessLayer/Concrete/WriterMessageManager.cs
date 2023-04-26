@@ -81,5 +81,15 @@ namespace BlogProject1.BusinessLayer.Concrete
         {
            return await  _message2Repository.GetCountAsync(filter);
         }
+
+        public Task<List<WriterMessage>> TGetListAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<WriterMessage> TGetByFilterAsync(Expression<Func<WriterMessage, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

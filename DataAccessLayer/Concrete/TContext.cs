@@ -11,11 +11,15 @@ namespace BlogProject1.DataAccessLayer.Concrete
 {
 	public class TContext : IdentityDbContext<WriterUser, WriterRole, int>
 	{
-		//public TContext(DbContextOptions options) : base(options)
-		//{
+        //public TContext(DbContextOptions options) : base(options)
+        //{
+        //}
 
-		//}
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //public TContext(DbContextOptions options) : base(options)
+        //{
+
+        //}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			optionsBuilder.UseSqlServer("server=(localdb)\\MSSQLLocalDB;database=3ASPNETCOREBlogProjectDB;integrated security=true");
 			//optionsBuilder.UseSqlServer("server=DESKTOP-QMOGCM6; database=Test; integrated security=true;Encrypt=False;");
@@ -42,9 +46,7 @@ namespace BlogProject1.DataAccessLayer.Concrete
                     .HasOne(c => c.Blog)
                     .WithMany(b => b.Comments)
                     .HasForeignKey(c => c.BlogID)
-					.OnDelete(DeleteBehavior.ClientSetNull);
-
-
+					.OnDelete(DeleteBehavior.Cascade);
             base.OnModelCreating(modelBuilder);
 		}
 

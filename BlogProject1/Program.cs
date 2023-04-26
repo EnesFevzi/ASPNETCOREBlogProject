@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using System;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +21,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddDbContext<TContext>();
-builder.Services.AddIdentity<WriterUser, WriterRole>().AddEntityFrameworkStores<TContext>().AddDefaultTokenProviders();
+builder.Services.AddIdentity<WriterUser, WriterRole>(x =>
+{
+    x.Password.RequireUppercase = false;
+    x.Password.RequireNonAlphanumeric = false;
+})
+    .AddEntityFrameworkStores<TContext>().AddDefaultTokenProviders();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<UserManager<WriterUser>>();
 builder.Services.AddScoped<RoleManager<WriterRole>>();
@@ -32,11 +38,6 @@ builder.Services.LoadServiceLayerExtension();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddSession();
 
-
-
-
-
-
 builder.Services.AddMvc(config =>
 {
     var policy = new AuthorizationPolicyBuilder()
@@ -46,18 +47,13 @@ builder.Services.AddMvc(config =>
 
 });
 
-//builder.Services.AddAuthentication(
-//                CookieAuthenticationDefaults.AuthenticationScheme)
-//                .AddCookie(x =>
-//                {
-//                    x.LoginPath = "/Login/Index";
-//                }
-//            );
-
-
-
-
-
+builder.Services.AddAuthentication(
+                CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(x =>
+                {
+                    x.LoginPath = "/Login/Index";
+                }
+            );
 
 
 
@@ -65,7 +61,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.HttpOnly = true;
     options.ExpireTimeSpan = TimeSpan.FromDays(30);
-    options.AccessDeniedPath = new PathString("/Login/AccessDenied");
+    options.AccessDeniedPath = "/ErrorPage/Index";
     options.LoginPath = "/Login/Index/";
     options.LogoutPath = "/Login/Logout";
     options.SlidingExpiration = true;
@@ -111,7 +107,7 @@ app.UseEndpoints(endpoints =>
    );
     endpoints.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}"
+        pattern: "{controller=Blog}/{action=Index}/{id?}"
         );
 
 });

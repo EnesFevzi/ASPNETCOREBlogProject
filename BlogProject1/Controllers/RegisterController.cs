@@ -11,11 +11,13 @@ namespace ASPNETCOREBlogProject.Controllers
     {
         private readonly UserManager<WriterUser> _userManager;
         private readonly SignInManager<WriterUser> _signInManager;
+        private readonly RoleManager<WriterRole> _roleManager;
 
-        public RegisterController(UserManager<WriterUser> userManager, SignInManager<WriterUser> signInManager)
+        public RegisterController(UserManager<WriterUser> userManager, SignInManager<WriterUser> signInManager, RoleManager<WriterRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
         [AllowAnonymous]
         [HttpGet]
@@ -45,19 +47,7 @@ namespace ASPNETCOREBlogProject.Controllers
 
                 if (result.Succeeded)
                 {
-                    var user = await _userManager.FindByNameAsync(User.Identity.Name);
-                    if (userRegisterViewModel.Picture != null)
-                    {
-                        var resource = Directory.GetCurrentDirectory();
-                        var extension = Path.GetExtension(userRegisterViewModel.Picture.FileName);
-                        var imagename = Guid.NewGuid() + extension;
-                        var savelocation = resource + "/wwwroot/UserImage/" + imagename;
-                        var stream = new FileStream(savelocation, FileMode.Create);
-                        await userRegisterViewModel.Picture.CopyToAsync(stream);
-                        user.ImageUrl = imagename;
-                        await _userManager.UpdateAsync(appUser); // Güncellenen satır
-                    }
-
+                    ViewBag.SuccessMessage = "Kayıt işlemi başarılı.";
                     return RedirectToAction("Index", "Login");
                 }
                 else

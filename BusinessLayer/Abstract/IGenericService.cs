@@ -13,14 +13,11 @@ namespace BlogProject1.BusinessLayer.Abstract
 		void TAdd(T entity);
 		void TDelete(T entity);
 		void TUpdate(T entity);
-		List<T> TGetListAll(Expression<Func<T, bool>> filter);
+        Task<List<T>> TGetListAsync();
         T TGetByID(int id);
         List<T> TGetList();
 		List<T> TGetByFilter(Expression<Func<T, bool>> filter);
         Task<int> GetCountAsync(Expression<Func<T, bool>> filter = null);
-
-
-
-
+        Task<T> TGetByFilterAsync(Expression<Func<T, bool>> filter = null);
     }
 }
