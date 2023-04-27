@@ -5,6 +5,7 @@ using BlogProject1.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Xml;
 
 namespace ASPNETCOREBlogProject.Areas.Admin.ViewComponents.Statictics
 {
@@ -38,16 +39,34 @@ namespace ASPNETCOREBlogProject.Areas.Admin.ViewComponents.Statictics
 
 
 
+        //public async Task<IViewComponentResult> InvokeAsync()
+        //{
+        //    var value = await _userManager.FindByNameAsync(User.Identity.Name);
+        //    ViewBag.v1 = value.Name;
+        //    ViewBag.v2 = value.Surname;
+        //    ViewBag.v3 = value.ImageUrl;
+        //    return View();
+        //}
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var value = await _userManager.FindByNameAsync(User.Identity.Name);
-            ViewBag.v1 = value.Name;
-            ViewBag.v2 = value.Surname;
-            ViewBag.v3 = value.ImageUrl;
-            //ViewBag.v3 = value.About;
-            //ViewBag.v1 = _context.Admins.Where(x => x.AdminID == 1).Select(y => y.Name);
-            //ViewBag.v2 = _context.Admins.Where(x => x.AdminID == 1).Select(y => y.ImageURL).FirstOrDefault();
-            //ViewBag.v3 = _context.Admins.Where(x => x.AdminID == 1).Select(y => y.ShortDescription).FirstOrDefault();
+            ViewBag.UserCount = await _userService.GetByUserCountAsync();
+            //ViewBag.LikeCommentCount = await _commentService.GetCountAsync(x => x.BlogScore > 2);
+            ViewBag.NewsLetterCount = await _newsLetterService.GetCountAsync();
+            //ViewBag.CategoryCount = await _categoryService.GetCountAsync();
+            string exchangeRate = "https://www.tcmb.gov.tr/kurlar/today.xml";
+            var xmlDoc = new XmlDocument();
+            try
+            {
+                xmlDoc.Load(exchangeRate);
+                ViewBag.Euro = xmlDoc.SelectSingleNode("Tarih_Date/Currency [@Kod='EUR']/BanknoteSelling").InnerXml.ToString();
+                ViewBag.Dolar = xmlDoc.SelectSingleNode("Tarih_Date/Currency [@Kod='USD']/BanknoteSelling").InnerXml.ToString();
+            }
+            catch
+            {
+
+                ViewBag.Euro = 0;
+                ViewBag.Dolar = 0;
+            }
             return View();
         }
     }

@@ -19,9 +19,8 @@ namespace ASPNETCOREBlogProject.Areas.Admin.ViewComponents.Statictics
         {
             var value = _blogService.TGetList();
             ViewBag.v1 = value.Select(y => y.BlogTitle).TakeLast(1).FirstOrDefault();
-            ViewBag.v2 = _blogService.GetCountAsync(x => x.BlogStatus);
-            ViewBag.v1 = _context.Blogs.OrderByDescending(x => x.BlogID).Select(x => x.BlogTitle).Take(1).FirstOrDefault();
-            ViewBag.v3 = _context.Comments.Count();
+            //ViewBag.v2 = _blogService.GetCountAsync(x => x.BlogStatus);
+            ViewBag.v2 = _context.Blogs.Count();
             return View();
         }
     }

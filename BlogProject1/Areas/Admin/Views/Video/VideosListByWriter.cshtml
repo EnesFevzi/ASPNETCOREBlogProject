@@ -1,0 +1,35 @@
+﻿@using BlogProject1.EntityLayer.Concrete
+@model List<Video>
+@{
+    ViewData["Title"] = "VideosListByWriter";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Admin Videoları</h1>
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Blog Başlığı</th>
+        <th>Oluşturma Tarihi</th>
+        <th>Kategori</th>
+        <th>Durum</th>
+        <th>Sil</th>
+        <th>Düzenle</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.VideoID</th>
+            <td>@item.VideoTitle</td>
+            <td>@item.VideoCreateDate.ToShortDateString()</td>
+            <td>@item.Category.CategoryName</td>
+            <td>@item.VideoStatus</td>
+            <td>
+                <a href="/Admin/Video/DeleteVideo/@item.VideoID" class="btn btn-danger"
+                   onclick="return confirm('Silmek istediğinize emin misiniz?')">Sil</a>
+            <td> <a href="/Admin/Video/EditVideo/@item.VideoID" class="btn btn-warning">Düzenle</a></td>
+        </tr>
+    }
+</table>
+<a href="/Admin/Video/AddVideo/" class="btn btn-primary">Yeni Haber Oluştur</a>
+

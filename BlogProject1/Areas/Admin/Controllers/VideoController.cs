@@ -15,9 +15,9 @@ using System.Data;
 
 namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    
     [Area("Admin")]
-    [Route("Admin/[controller]/[action]")]
+    [Authorize(Roles = "Admin")]
 
     public class VideoController : Controller
     {
@@ -38,6 +38,14 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var values = _videoService.GetVideosListWithCategory();
+            return View(values);
+        }
+        public IActionResult VideosListByWriter()
+        {
+            var username = User.Identity.Name;
+            var usermail = _context.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
+            var writerID = _context.WriterUsers.Where(x => x.Email == usermail).Select(y => y.Id).FirstOrDefault();
+            var values = _videoService.GetVideosListWithWriter(writerID);
             return View(values);
         }
         [HttpGet]

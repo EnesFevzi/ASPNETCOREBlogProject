@@ -28,6 +28,8 @@ namespace BlogProject1.BusinessLayer.Extensions
             services.AddScoped<INewService, NewManager>();
             services.AddScoped<IMessageService, MessageManager>();
             services.AddScoped<INotificationService, NotificationManager>();
+            services.AddScoped<INewsLetterService, NewsLetterManager>();
+            services.AddScoped<IWriterUserService, WriterUserManager>();
             services.AddScoped<RoleManager<WriterRole>>();
 
             return services;

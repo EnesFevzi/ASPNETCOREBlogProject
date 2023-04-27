@@ -1,5 +1,6 @@
 ﻿using BlogProject1.BusinessLayer.Abstract;
 using BlogProject1.DataAccessLayer.Abstract;
+using BlogProject1.DataAccessLayer.Concrete.EntityFramework;
 using BlogProject1.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -19,9 +20,9 @@ namespace BlogProject1.BusinessLayer.Concrete
             _contactRepository = contactRepository;
         }
 
-        public List<int> GetCountAsync(Expression<Func<Contact, bool>> filter)
+        public async Task<int> GetCountAsync(Expression<Func<Contact, bool>> filter)
         {
-            throw new NotImplementedException();
+            return await _contactRepository.GetCountAsync(filter);
         }
 
         public void TAdd(Contact contact)

@@ -19,9 +19,9 @@ namespace BlogProject1.BusinessLayer.Concrete
             _newsLetterRepository = newsLetterRepository;
         }
 
-        public List<int> GetCountAsync(Expression<Func<NewsLetter, bool>> filter)
+        public async Task<int> GetCountAsync(Expression<Func<NewsLetter, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            return await _newsLetterRepository.GetCountAsync(filter);
         }
 
         public void TAdd(NewsLetter newsLetter)
@@ -69,9 +69,6 @@ namespace BlogProject1.BusinessLayer.Concrete
             throw new NotImplementedException();
         }
 
-        Task<int> IGenericService<NewsLetter>.GetCountAsync(Expression<Func<NewsLetter, bool>> filter)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

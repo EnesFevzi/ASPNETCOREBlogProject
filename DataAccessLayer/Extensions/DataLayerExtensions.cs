@@ -28,6 +28,8 @@ namespace BlogProject1.DataAccessLayer.Extensions
             services.AddScoped<INewRepository, EfNewRepository>();
             services.AddScoped<IMessageRepository, EfMessageRepository>();
             services.AddScoped<INotificationRepository, EfNotificationRepository>();
+            services.AddScoped<INewsLetterRepository, EfNewsLetterRepository>();
+            services.AddScoped<IWriterUserRepository, EfWriterUserRepository>();
             
 
             //services.AddScoped<ICategoryRepository, EfCategoryRepository>();
