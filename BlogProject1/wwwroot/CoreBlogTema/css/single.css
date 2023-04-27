@@ -199,9 +199,9 @@ h5.mt-0 {
     cursor: pointer;
 }
 
-.comment-top button.btn.btn-primary.submit[type="submit"]:hover {
-    background: #01cd74;
-}
+    .comment-top button.btn.btn-primary.submit[type="submit"]:hover {
+        background: #e7508f;
+    }
 
 .single-gd form input[type="email"] {
     outline: none;

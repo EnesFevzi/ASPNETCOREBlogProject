@@ -7,6 +7,7 @@ using BlogProject1.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection.Metadata;
 using X.PagedList;
@@ -31,9 +32,11 @@ namespace ASPNETCOREBlogProject.Controllers
 
         public IActionResult Index()
         {
+            
+                var values = _blogService.GetBlogsListWithCategory();
+                return View(values);
            
-            var values = _blogService.GetBlogsListWithCategory();
-            return View(values);
+  
         }
         [AllowAnonymous]
         public IActionResult BlogDetails(int id)

@@ -36,6 +36,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="wwwroot\Blogkapakları\" />
     <Folder Include="wwwroot\UserImage\" />
     <Folder Include="wwwroot\VideoFiles\" />
     <Folder Include="wwwroot\skydash\.git\objects\info\" />

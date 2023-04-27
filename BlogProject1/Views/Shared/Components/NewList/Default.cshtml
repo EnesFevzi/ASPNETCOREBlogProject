@@ -1,0 +1,25 @@
+﻿@using BlogProject1.EntityLayer.Concrete
+@model List<New>
+@if (Model.Count > 0)
+{
+    @foreach (var item in Model)
+    {
+        <li>
+
+            <a href="@item.NewImage">
+                <img src="@item.NewImage" alt="" data-desoslide-caption="<h3>Son 2 Blog</h3>">
+                <div class="mid-text-info">
+                    <h4>@item.NewTitle</h4>
+                    <p>@item.NewContent </p>
+                    <div class="sub-meta">
+                        <span>
+                            <i class="far fa-clock"></i> @item.NewsCreateDate.ToString("dd.MM.yyyy")
+                        </span>
+                    </div>
+                </div>
+
+            </a>
+            
+        </li>
+    }
+}       
