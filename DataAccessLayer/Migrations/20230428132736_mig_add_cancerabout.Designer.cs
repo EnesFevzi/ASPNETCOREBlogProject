@@ -4,6 +4,7 @@ using BlogProject1.DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogProject1.DataAccessLayer.Migrations
 {
     [DbContext(typeof(TContext))]
-    partial class TContextModelSnapshot : ModelSnapshot
+    [Migration("20230428132736_mig_add_cancerabout")]
+    partial class mig_add_cancerabout
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -182,6 +185,9 @@ namespace BlogProject1.DataAccessLayer.Migrations
                     b.Property<string>("AboutMapLocation")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("AboutStatus")
+                        .HasColumnType("bit");
+
                     b.Property<string>("CancerAboutDetails1")
                         .HasColumnType("nvarchar(max)");
 
@@ -211,9 +217,6 @@ namespace BlogProject1.DataAccessLayer.Migrations
 
                     b.Property<string>("CancerAboutHead5")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("CancerAboutStatus")
-                        .HasColumnType("bit");
 
                     b.HasKey("CancerAboutID");
 

@@ -10,22 +10,23 @@ namespace ASPNETCOREBlogProject.Controllers
 	{
 		//AboutManager aboutManager= new AboutManager(new EfAboutRepository(new TContext()))
 		private readonly IAboutService _aboutService;
+		private readonly ICancerAboutService _cancerAboutService;
 
-        public AboutController(IAboutService aboutService)
+        public AboutController(IAboutService aboutService, ICancerAboutService cancerAboutService)
         {
             _aboutService = aboutService;
+            _cancerAboutService = cancerAboutService;
         }
 
         public IActionResult Index()
 		{
-			var values = _aboutService.TGetList();
-
-			return View(values);
+			return View();
 		}
 
 		public PartialViewResult SocaialMediaAbout()
 		{
 			return PartialView();
 		}
+
 	}
 }

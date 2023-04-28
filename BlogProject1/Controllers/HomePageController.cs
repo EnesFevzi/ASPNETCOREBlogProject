@@ -7,7 +7,7 @@ namespace ASPNETCOREBlogProject.Controllers
     [AllowAnonymous]
     public class HomePageController : Controller
     {
-        private readonly IBlogService _blogService;
+        protected readonly IBlogService _blogService;
 
         public HomePageController(IBlogService blogService)
         {
@@ -21,6 +21,14 @@ namespace ASPNETCOREBlogProject.Controllers
 		public PartialViewResult Banner()
 		{
 			return PartialView();
-		} 
+		}
+        public PartialViewResult CancerBlog()
+        {
+            return PartialView();
+        }
+        public PartialViewResult CancerBlog2()
+        {
+            return PartialView();
+        }
     }
 }

@@ -18,6 +18,7 @@ namespace BlogProject1.BusinessLayer.Extensions
         public static IServiceCollection LoadServiceLayerExtension(this IServiceCollection services)
         {
             services.AddScoped<IAboutService , AboutManager>();
+            services.AddScoped<ICancerAboutService , CancerAboutManager>();
             services.AddScoped<IContactService , ContactManager>();
             services.AddScoped<IWriterTaskService , WriterTaskManager>();
             services.AddScoped<IBlogService , BlogManager>();

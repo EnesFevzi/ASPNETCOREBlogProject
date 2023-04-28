@@ -51,6 +51,7 @@ namespace BlogProject1.DataAccessLayer.Concrete
 		}
 
         public DbSet<About> Abouts { get; set; }
+        public DbSet<CancerAbout> CancerAbouts { get; set; }
 		public DbSet<Admin> Admins { get; set; }
 		public DbSet<Blog> Blogs { get; set; }
 		public DbSet<BlogRating> BlogRatings { get; set; }

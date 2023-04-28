@@ -13,7 +13,7 @@
     <!--/main-->
     <section class="main-content-w3layouts-agileits">
         <div class="container">
-            <h3 class="tittle">Hakkımızda</h3>
+            <h3 class="tittle">MEME KANSERİ</h3>
             <div class="row inner-sec">
                 <!--left-->
                 <div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
@@ -24,18 +24,56 @@
                                 <img src="~/CoreBlogTema/images/b5.jpg" class="img-fluid" alt="">
                             </a>
                         </div>
-                        <h3>
-                            Biz Kimiz
-                        </h3>
-                        @foreach (var item in Model)
-                        {
+                        <h3>  Meme Kanseri </h3>
+                        <p>
+                            Meme kanseri kadınlarda görülen kanser tipleri arasında birinci sırada yer almaktadır.
+                            Hayat boyu her 8 kadından birinin kansere yakalanma riski vardır. Meme kanseri,
+                            meme dokusundaki hücrelerden gelişen kanserlerdir.Meme dokusunun herhangi bir yerinden kaynaklanabilir.
+                            En sık görülen tipi; meme kanallarından kaynaklanan “duktal” kanser denen kanserlerdir.
+                            Süt üreten bezlerden köken alan “lobüler” kanserler de sık görülür. Ayrıca diğer
+                            dokulardan kaynaklanan daha nadir medüller, tübüler, müsinöz gibi tipleri de vardır.
+                        </p>
+
+                        <h3>Risk Faktörleri</h3>
+                        <p>
+                            Meme kanseri gelişiminde bilinen en önemli risk faktörleri şunlardır:
+                        </p>
+                        <ul style="list-style-type: none;">
+                            <li>Obez veya aşırı kilolu olmak</li>
+                            <li>Yeterli fiziksel aktivite yapmamak</li>
+                            <li>Alkol ve sigara kullanımı</li>
+                            <li>İlk doğum yaşı 30’dan sonra olanlar veya hiç doğum yapmamış olanlar</li>
+                            <li>İlk adet yaşı: İlk adetini erken yaşlarda görenler, yaşam boyu daha uzun süre östrojen hormonuna maruz kalacaklarından dolayı risk artmaktadır.</li>
+                            <li>Menopoz yaşı: Menopoz bilindiği gibi kadının adetten kesildiği, doğurganlığının sona erdiği dönemdir. İleri yaşta (>55 yaş) menopoza girme meme kanseri riskini arttırmaktadır. Burada da etken uzun süre östrojen hormonuna maruz kalmadır.</li>
+                            <li>Kadın cinsiyet, ileri yaş</li>
+                            <li>BRCA-1, BRCA-2 mutasyonları gibi bir takım genetik değişiklikler</li>
+                            <li>Meme kanseri öyküsünün bulunması</li>
+                            <li>Göğüse radyoterapi almış olmak</li>
+                            <li>Bazı iyi huylu meme hastalıkları (fibroadenom, papillomatosis, gibi)</li>
+                            <li>Ailede meme kanseri öyküsü olması: Annesinde, anne tarafından akrabalarında, teyzesinde ve ve/veya kız kardeşinde meme kanseri olan kadınlarda meme kanseri gelişmesi riski normal toplumdan daha fazladır.</li>
+                        </ul>
+                        <h3>Belirtiler</h3>
+                        <p>
+                            Meme kanserinin en sık rastlanan belirtisi, memede ağrısız, zamanla büyüyen bir kitlenin hissedilmesidir.
+                            Ancak, hastaların çok azında ağrı da belirtilere eşlik edebilir.
+                            Daha nadir olarak memede çekintiler, deride kalınlaşma, şişlikler, deride tahriş ya da bozulmalar ve meme ucunun
+                            hassaslaşması ya da içe dönmesi de dahil olmak üzere meme ucu belirtileri yer almaktadır. Sanıldığının aksine
+                            ağrı ve kanlı akıntı ileri evrelerde ortaya çıkmaktadır.
+                        </p>
+                        <h3>Tanı</h3>
+                        <p>
+                            Erken evrede meme kanserleri diğer kanser çeşitlerinde olduğu gibi ileri dönemlere gelene kadar belirgin bir belirti vermeyebilir.
+                            Erken teşhiste en önemli faktör, kişinin bu konuda bilinçlendirilmesidir.
+                            Bu nedenle, meme kanserinin erken tanısı için önerilen kontrol programlarını uygulamanız çok önemlidir.
+                            Meme kanserine erken evrede tanı konması, tedavinin başarıya ulaşma ve hayatta kalma şansını arttırır.
+                            Erken tanı için üç temel yöntem uygulanabilir. Bunlar ; evde kendi kendine yapılan meme kontrolleri
+                            ( Kadınların 20 yaşından sonraki dönemde, her ay memelerini kendi kendilerine muayene etmeleri gereklidir.)
+                            Meme dokusu içerisinde herhangi bir şüpheli kitle ele geldiğinde vakit geçirmeden doktora başvurunuz.
+                            Ayrıca 40-69 yaş arası kadınların 2 yılda bir mamografi tetkiklerini yaptırmaları gerekmektedir.
+                        </p>
 
 
-                            <p>
-                                @item.AboutDetails1
-                            </p>
-                        }
-                        <a href="single.html" class="btn btn-primary read-m">Read More</a>
+                        @*<a href="single.html" class="btn btn-primary read-m">Read More</a>*@
                     </div>
 
                 </div>
@@ -43,9 +81,6 @@
                 <!--right-->
                 <aside class="col-lg-4 agileits-w3ls-right-blog-con text-right">
                     <div class="right-blog-info text-left">
-                        <div class="tech-btm">
-                            <img src="~/CoreBlogTema/images/banner1.jpg" class="img-fluid" alt="">
-                        </div>
                         @await Html.PartialAsync("~/Views/NewsLetter/SubscribeMail.cshtml")
                         @await Html.PartialAsync("~/Views/About/SocaialMediaAbout.cshtml")
                     </div>
