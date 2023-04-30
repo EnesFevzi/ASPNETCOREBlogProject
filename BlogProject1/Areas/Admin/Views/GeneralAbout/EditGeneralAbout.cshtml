@@ -1,0 +1,88 @@
+﻿@model BlogProject1.EntityLayer.Concrete.About
+@{
+    ViewData["Title"] = "EditGeneralAbout";
+    Layout = "~/Views/Shared/_BlogLayout.cshtml";
+}
+
+<h1>Genel Hakkımızda Düzenlenme Sayfası</h1>
+
+@using (Html.BeginForm("EditGeneralAbout", "GeneralAbout", FormMethod.Post))
+{
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-description"> Deneyim Düzenleme Paneli </p>
+                <form class="forms-sample">
+                    <div class="form-group">
+                        <label>ID</label>
+                        @Html.TextBoxFor(x => x.AboutID, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                    <div class="form-group">
+                        <label> 1. Başlık </label>
+                        @Html.TextBoxFor(x => x.AboutHead1, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label> 1. Başlık Açıklaması</label>
+                        @Html.TextAreaFor(x=>x.AboutDetails1,15,3, new {@class = "form-control"})
+                    </div>
+                    <div class="form-group">
+                        <label> 1. Resim</label>
+                        @Html.TextBoxFor(x => x.AboutImage1, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label> 2. Başlık </label>
+                        @Html.TextBoxFor(x => x.AboutHead2, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>2. Başlık Açıklaması</label>
+                        @Html.TextAreaFor(x=>x.AboutDetails2,15,3, new {@class = "form-control"})
+                    </div>
+                    <div class="form-group">
+                        <label> 2. Resim</label>
+                        @Html.TextBoxFor(x => x.AboutImage2, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label> 3. Başlık </label>
+                        @Html.TextBoxFor(x => x.AboutHead3, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label> 3. Başlık Açıklaması</label>
+                        @Html.TextAreaFor(x=>x.AboutDetails3,15,3, new {@class = "form-control"})
+                    </div>
+                    <div class="form-group">
+                        <label> 3. Resim</label>
+                        @Html.TextBoxFor(x => x.AboutImage3, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label> 4. Başlık </label>
+                        @Html.TextBoxFor(x => x.AboutHead4, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label> 4. Başlık Açıklaması</label>
+                        @Html.TextAreaFor(x=>x.AboutDetails4,15,3, new {@class = "form-control"})
+                    </div>
+                    <div class="form-group">
+                        <label> 4. Resim</label>
+                        @Html.TextBoxFor(x => x.AboutImage4, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label> 5. Başlık </label>
+                        @Html.TextBoxFor(x => x.AboutHead5, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label> 5. Başlık Açıklaması</label>
+                        @Html.TextAreaFor(x=>x.AboutDetails5,15,3, new {@class = "form-control"})
+                    </div>
+                    <div class="form-group">
+                        <label> 5. Resim</label>
+                        @Html.TextBoxFor(x => x.AboutImage5, new { @class = "form-control" })
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mr-2">Kaydet</button>
+                    <button class="btn btn-dark">İptal</button>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+

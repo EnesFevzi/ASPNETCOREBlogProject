@@ -23,7 +23,6 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var values = _cancerAboutService.TGetList();
-
             return View(values);
         }
         [HttpGet]

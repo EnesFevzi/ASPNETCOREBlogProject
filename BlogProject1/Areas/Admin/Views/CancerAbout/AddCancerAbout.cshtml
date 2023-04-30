@@ -14,11 +14,17 @@
     @Html.Label(" Başlık Açıklaması-1")
     @Html.TextAreaFor(x=>x.CancerAboutDetails1,15,3, new {@class = "form-control"})
     <br />
+    @Html.Label("1.Başlık-1 Resim")
+    @Html.TextBoxFor(x=>x.CancerAboutImage1, new {@class = "form-control"})
+    <br />
     @Html.Label("2.Başlık-2")
     @Html.TextBoxFor(x=>x.CancerAboutHead2, new {@class = "form-control"})
     <br />
     @Html.Label(" 2.Başlık Açıklaması-2")
     @Html.TextAreaFor(x=>x.CancerAboutDetails2,15,3, new {@class = "form-control"})
+    <br />
+    @Html.Label("2.Başlık-2 Resim")
+    @Html.TextBoxFor(x=>x.CancerAboutImage2, new {@class = "form-control"})
     <br />
     @Html.Label("3. Başlık-3")
     @Html.TextBoxFor(x=>x.CancerAboutHead3, new {@class = "form-control"})
@@ -26,17 +32,26 @@
     @Html.Label("3. Başlık Açıklaması-3")
     @Html.TextAreaFor(x=>x.CancerAboutDetails3,15,3, new {@class = "form-control"})
     <br />
+    @Html.Label("3.Başlık-3 Resim")
+    @Html.TextBoxFor(x=>x.CancerAboutImage3, new {@class = "form-control"})
+    <br />
     @Html.Label("4. Başlık-4")
     @Html.TextBoxFor(x=>x.CancerAboutHead4, new {@class = "form-control"})
     <br />
     @Html.Label("4. Başlık Açıklaması-4")
     @Html.TextAreaFor(x=>x.CancerAboutDetails4,15,3, new {@class = "form-control"})
     <br />
+    @Html.Label("4.Başlık-4 Resim")
+    @Html.TextBoxFor(x=>x.CancerAboutImage4, new {@class = "form-control"})
+    <br />
     @Html.Label("5. Başlık-5")
     @Html.TextBoxFor(x=>x.CancerAboutHead5, new {@class = "form-control"})
     <br />
     @Html.Label("5. Başlık Açıklaması-5")
     @Html.TextAreaFor(x=>x.CancerAboutDetails5,15,3, new {@class = "form-control"})
+    <br />
+    @Html.Label("5.Başlık-5 Resim")
+    @Html.TextBoxFor(x=>x.CancerAboutImage5, new {@class = "form-control"})
     <br />
     <button class="btn btn-info">Kaydet</button>
 }

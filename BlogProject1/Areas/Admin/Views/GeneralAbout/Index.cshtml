@@ -1,0 +1,50 @@
+﻿@using BlogProject1.EntityLayer.Concrete
+@model List<About>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_BlogLayout.cshtml";
+}
+
+<h1>Meme Kanseri Sayfası Bilgileri</h1>
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>1. BaşlıK</th>
+        <th>1. Açıklama</th>
+        <th>2. BaşlıK</th>
+        <th>2. Açıklama</th>
+        <th>3. BaşlıK</th>
+        <th>3. Açıklama</th>
+        <th>4. BaşlıK</th>
+        <th>4. Açıklama</th>
+        <th>5. BaşlıK</th>
+        <th>5. Açıklama</th>
+        <th>Durum</th>
+        <th>Sil</th>
+        <th>Düzenle</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.AboutID</th>
+            <th>@item.AboutHead1</th>
+            <th>@item.AboutDetails1</th>
+            <th>@item.AboutHead2</th>
+            <th>@item.AboutDetails2</th>
+            <th>@item.AboutHead3</th>
+            <th>@item.AboutDetails3</th>
+            <th>@item.AboutHead4</th>
+            <th>@item.AboutDetails4</th>
+            <th>@item.AboutHead5</th>
+            <th>@item.AboutDetails5</th>
+            <td>@item.AboutStatus</td>
+            <td>
+                <a href="/Admin/New/DeleteNew/@item.AboutID" class="btn btn-danger"
+                   onclick="return confirm('Silmek istediğinize emin misiniz?')">Sil</a>
+            <td> <a href="/Admin/New/EditNew/@item.AboutID" class="btn btn-warning">Düzenle</a></td>
+        </tr>
+    }
+</table>
+<a href="/Admin/CancerAbout/AddCancerAbout/" class="btn btn-primary">Yeni Oluştur</a>
+
+

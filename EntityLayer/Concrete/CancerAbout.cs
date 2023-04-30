@@ -19,9 +19,12 @@ namespace BlogProject1.EntityLayer.Concrete
 		public string? CancerAboutDetails3 { get; set; }
 		public string? CancerAboutDetails4 { get; set; }
 		public string? CancerAboutDetails5 { get; set; }
-		public string? AboutImage1 { get; set; }
-		public string? AboutImage2 { get; set; }
-		public string? AboutMapLocation { get; set; }
+        public string? CancerAboutImage1 { get; set; }
+        public string? CancerAboutImage2 { get; set; }
+        public string? CancerAboutImage3 { get; set; }
+        public string? CancerAboutImage4 { get; set; }
+        public string? CancerAboutImage5 { get; set; }
+        public string? AboutMapLocation { get; set; }
 		public bool CancerAboutStatus { get; set; }
 	}
 }
