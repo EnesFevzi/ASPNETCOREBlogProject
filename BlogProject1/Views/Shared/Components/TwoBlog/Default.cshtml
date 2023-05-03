@@ -1,0 +1,28 @@
+﻿@using BlogProject1.EntityLayer.Concrete
+@model List<Blog>
+
+<div class="blog-girds-sec">
+	<div class="row">
+		<div class="col-md-6 blog-grid-top">
+			@foreach (var item in Model)
+				{
+			<div class="b-grid-top">
+				
+				<div class="blog_info_left_grid">
+					<a href="single.html">
+						<img src="~/CoreBlogTema/images/b2.jpg" class="img-fluid" alt="">
+					</a>
+				</div>
+				<h3>
+					<a href="single.html">@item.BlogTitle </a>
+				</h3>
+				@*<p>@item.BlogContent</p>*@
+
+					<p class="card-text mb-3">@Html.Raw(item.BlogContent.Substring(0, Math.Min(item.BlogContent.Length, 25)) + (item.BlogContent.Length > 25 ? "..." : ""))</p>
+				
+			</div>
+			}
+		</div>
+	</div>
+
+</div>

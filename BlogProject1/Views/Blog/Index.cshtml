@@ -45,6 +45,8 @@
                                     </h5>
 
                                     @*<p class="card-text mb-3">@item.BlogContent.Substring(0,item.BlogContent.Substring(0,25).LastIndexOf(" "))...</p>*@
+
+                                    <p class="card-text mb-3">@Html.Raw(item.BlogContent.Substring(0, Math.Min(item.BlogContent.Length, 25)) + (item.BlogContent.Length > 25 ? "..." : ""))</p>
                                     <a href="/Blog/BlogDetails/@item.BlogID" class="btn btn-primary read-m">Devamını Oku</a>
                                 </div>
                                 <br />

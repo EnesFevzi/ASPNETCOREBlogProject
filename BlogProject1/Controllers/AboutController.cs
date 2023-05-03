@@ -19,9 +19,11 @@ namespace ASPNETCOREBlogProject.Controllers
         }
 
         public IActionResult Index()
+
 		{
-			return View();
-		}
+            var values = _aboutService.TGetList();
+            return View(values);
+        }
 
 		public PartialViewResult SocaialMediaAbout()
 		{
