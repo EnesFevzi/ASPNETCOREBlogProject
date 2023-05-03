@@ -35,7 +35,7 @@ namespace ASPNETCOREBlogProject.Areas.Admin.Controllers
         {
             about.AboutStatus = true;
             _aboutService.TAdd(about);
-            return RedirectToAction("Index", "CancerAbout", new { area = "Admin" });
+            return RedirectToAction("Index", "GeneralAbout", new { area = "Admin" });
 
         }
         public IActionResult GeneralAboutDelete(int id)
